@@ -1,0 +1,199 @@
+/* ==========================================================================
+   NABERAN, Catalogue technique partenaire (naberan.css)
+   Bandeau d'intro, grille des catégories, tableaux de caractéristiques,
+   recherche/filtre en direct. Aucune photo produit pour l'instant.
+   ========================================================================== */
+
+/* ---------- Bandeau catalogue (remplace le hero photo : pas d'images) ------- */
+.nab-intro {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: clamp(28px, 4vw, 56px);
+  align-items: end;
+}
+.nab-intro__text { max-width: 62ch; }
+.nab-intro__text p { margin-top: 14px; color: rgba(226, 236, 248, .78); }
+.nab-intro__stats { display: flex; gap: clamp(20px, 3vw, 40px); }
+.nab-intro__stats .n { font-family: var(--f-head); font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 800; color: #fff; line-height: 1; }
+.nab-intro__stats .t { margin-top: 6px; font-family: var(--f-mono); font-size: .66rem; letter-spacing: .12em; text-transform: uppercase; color: rgba(226, 236, 248, .55); }
+@media (max-width: 760px) { .nab-intro { grid-template-columns: 1fr; } }
+
+.nab-note {
+  margin-top: 22px;
+  display: inline-flex;
+  gap: 10px;
+  padding: 12px 18px;
+  border-radius: var(--r-sm);
+  background: rgba(255, 255, 255, .06);
+  border: 1px solid rgba(255, 255, 255, .14);
+  color: rgba(226, 236, 248, .78);
+  font-size: .88rem;
+}
+.nab-note svg { flex: none; margin-top: 2px; color: var(--azure-light); }
+
+/* ---------- Grille des catégories (page d'index) ----------------------------- */
+.nab-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.nab-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 24px 26px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  transition: border-color .3s, box-shadow .3s, transform .3s var(--ease);
+}
+.nab-card:hover { border-color: rgba(22, 167, 224, .55); box-shadow: var(--sh-md); transform: translateY(-3px); }
+.nab-card__top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.nab-card__num { font-family: var(--f-mono); font-size: .68rem; letter-spacing: .12em; color: var(--muted); }
+.nab-card__count { font-family: var(--f-head); font-weight: 800; font-size: 1.5rem; color: var(--azure-dark); line-height: 1; }
+.nab-card h3 { font-size: 1.08rem; }
+.nab-card__sub { font-size: .84rem; color: var(--muted); }
+.nab-card .arrow-link { margin-top: auto; font-size: .88rem; }
+@media (max-width: 960px) { .nab-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 580px) { .nab-grid { grid-template-columns: 1fr; } }
+
+/* Vignette photo reprise de la boutique (catégories illustrées) */
+.nab-card--photo { padding-top: 0; overflow: hidden; }
+.nab-card__thumb {
+  margin: 0 -26px;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: var(--bg-soft);
+}
+.nab-card__thumb img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  transition: transform .4s var(--ease);
+}
+.nab-card--photo:hover .nab-card__thumb img { transform: scale(1.05); }
+.nab-card--photo .nab-card__top { margin-top: 20px; }
+
+/* Photo d'en-tête de catégorie (réutilisée de la boutique) */
+.nab-cat-photo {
+  margin: 22px 0 4px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  max-height: 300px;
+}
+.nab-cat-photo img { width: 100%; height: 300px; object-fit: cover; display: block; }
+@media (max-width: 580px) { .nab-cat-photo img { height: 200px; } }
+
+/* ---------- Page catégorie : fil d'ariane des sous-tableaux ------------------- */
+.nab-toc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-bottom: 28px;
+  margin-bottom: 32px;
+  border-bottom: 1px solid var(--line);
+}
+.nab-toc a {
+  padding: 7px 14px;
+  font-size: .84rem;
+  font-weight: 600;
+  color: var(--navy-700);
+  background: var(--bg-soft);
+  border-radius: var(--r-full, 999px);
+  border: 1px solid transparent;
+  transition: background .2s, border-color .2s;
+}
+.nab-toc a:hover { border-color: rgba(22, 167, 224, .4); }
+
+/* ---------- Barre de recherche en direct -------------------------------------- */
+.nab-search {
+  position: sticky;
+  top: var(--header-h, 66px);
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 18px;
+  margin-bottom: 30px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  box-shadow: var(--sh-sm);
+}
+.nab-search svg { flex: none; color: var(--muted); }
+.nab-search input {
+  flex: 1;
+  border: 0;
+  outline: 0;
+  font-size: .96rem;
+  background: transparent;
+  color: var(--ink);
+}
+.nab-search input::placeholder { color: var(--muted); }
+.nab-search__count { font-family: var(--f-mono); font-size: .72rem; color: var(--muted); white-space: nowrap; }
+
+/* ---------- Sous-tableau produit ---------------------------------------------- */
+.nab-sub { margin-bottom: 52px; scroll-margin-top: 130px; }
+.nab-sub__head { margin-bottom: 14px; }
+.nab-sub__head h2 { font-size: 1.28rem; }
+.nab-sub__head .mono { display: block; margin-top: 4px; color: var(--azure-dark); font-size: .68rem; }
+
+.nab-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: #fff;
+}
+table.nab-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .86rem;
+  white-space: nowrap;
+}
+.nab-table thead th {
+  position: sticky;
+  top: 0;
+  background: var(--navy-800);
+  color: #fff;
+  text-align: left;
+  padding: 10px 14px;
+  font-family: var(--f-mono);
+  font-size: .66rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.nab-table thead th small { display: block; font-size: .9em; opacity: .68; text-transform: none; letter-spacing: 0; margin-top: 2px; }
+.nab-table tbody td { padding: 9px 14px; border-top: 1px solid var(--line); color: var(--body); }
+.nab-table tbody tr:nth-child(even) { background: var(--bg-soft); }
+.nab-table tbody tr.is-hidden { display: none; }
+.nab-table td.ref { font-family: var(--f-mono); font-weight: 600; color: var(--navy-800); white-space: nowrap; }
+
+.nab-empty {
+  display: none;
+  padding: 40px 20px;
+  text-align: center;
+  color: var(--muted);
+  font-size: .95rem;
+}
+body.nab-no-results .nab-empty { display: block; }
+
+/* ---------- Retour en haut de page -------------------------------------------- */
+.nab-back {
+  position: fixed;
+  right: 22px; bottom: 22px;
+  z-index: 40;
+  width: 46px; height: 46px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--navy-800);
+  color: #fff;
+  box-shadow: var(--sh-md);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+  transition: opacity .25s, transform .25s;
+}
+.nab-back.is-visible { opacity: 1; pointer-events: auto; transform: none; }

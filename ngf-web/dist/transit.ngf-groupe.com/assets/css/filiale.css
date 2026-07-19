@@ -1,0 +1,245 @@
+/* ==========================================================================
+   GROUPE NGF, Gabarit sous-sites filiales / filiale.css
+   Hero filiale, points forts, à-propos, services, galeries, contact.
+   Utilisé par : victorinox, transit, transport, dees, piriou-ngom.
+   ========================================================================== */
+
+/* ---------- Marque filiale dans l'en-tête -----------------------------------
+   Les logos détourés vont jusqu'au ratio 6:1 (NGF Transit) : on borne la
+   largeur autant que la hauteur, sinon l'en-tête déborde sur mobile.     */
+.brand--filiale .brand__logo { height: 40px; }
+.brand--filiale .brand__logo--chip {
+  height: auto;
+  width: auto;
+  max-height: 44px;
+  max-width: min(58vw, 230px);
+  padding: 6px 12px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  object-fit: contain;
+}
+
+/* ---------- HERO filiale ------------------------------------------------------ */
+.f-hero {
+  position: relative;
+  min-height: min(78vh, 760px);
+  display: flex;
+  align-items: flex-end;
+  isolation: isolate;
+  color: #fff;
+  overflow: hidden;
+}
+.f-hero__media { position: absolute; inset: 0; z-index: -2; }
+.f-hero__media img { width: 100%; height: 100%; object-fit: cover; }
+.f-hero__overlay {
+  position: absolute; inset: 0; z-index: -1;
+  background:
+    linear-gradient(90deg, rgba(4, 18, 42, .86) 0%, rgba(4, 18, 42, .46) 55%, rgba(4, 18, 42, .18) 100%),
+    linear-gradient(0deg, rgba(4, 18, 42, .8) 0%, transparent 48%);
+}
+.f-hero__inner { padding: 150px 0 clamp(52px, 7vw, 92px); max-width: 800px; }
+.f-hero .kicker--light { gap: 13px; }
+.f-hero .kicker--light::before { width: 30px; height: 2px; clip-path: none; background: var(--azure); }
+.f-hero h1 {
+  color: #fff;
+  font-size: clamp(2.4rem, 4.9vw, 4rem);
+  line-height: 1.05;
+  margin-top: 20px;
+}
+.f-hero__lead { margin-top: 20px; font-size: clamp(1rem, 1.4vw, 1.16rem); line-height: 1.75; color: rgba(235, 243, 251, .87); max-width: 58ch; }
+.f-hero__cta { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 34px; }
+
+/* ---------- Points forts (chevauche le hero) ---------------------------------- */
+.forces-wrap { position: relative; z-index: 10; margin-top: -64px; }
+.forces {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-lg);
+  overflow: hidden;
+}
+.force {
+  position: relative;
+  display: flex;
+  gap: 16px;
+  padding: clamp(24px, 3vw, 34px);
+  border-left: 1px solid var(--line);
+}
+.force:first-child { border-left: 0; }
+.force::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--azure);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .45s var(--ease);
+}
+.force:hover::after { transform: scaleX(1); }
+.force__ic {
+  flex: none;
+  width: 46px; height: 46px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--r-sm);
+  background: rgba(22, 167, 224, .1);
+  color: var(--azure-dark);
+}
+.force strong { display: block; font-family: var(--f-head); font-weight: 700; color: var(--navy-800); font-size: 1.02rem; }
+.force p { margin-top: 4px; font-size: .9rem; color: var(--muted); }
+@media (max-width: 860px) {
+  .forces { grid-template-columns: 1fr; }
+  .force { border-left: 0; border-top: 1px solid var(--line); }
+  .force:first-child { border-top: 0; }
+}
+
+/* ---------- À propos filiale ---------------------------------------------------- */
+.f-about { display: grid; grid-template-columns: 1fr .92fr; gap: clamp(44px, 6vw, 88px); align-items: center; }
+.f-about__text .kicker { margin-bottom: 16px; }
+.f-about__text p { margin-top: 18px; }
+.f-about__text .ticks { margin-top: 24px; }
+.f-about__media { position: relative; }
+.f-about__media img {
+  width: 100%;
+  aspect-ratio: 4 / 3.4;
+  object-fit: cover;
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-md);
+}
+.f-about__media::before {
+  content: "";
+  position: absolute;
+  inset: 34px -24px -24px 34px;
+  background-image: radial-gradient(rgba(22, 167, 224, .32) 1.4px, transparent 1.4px);
+  background-size: 17px 17px;
+  border-radius: var(--r-lg);
+  z-index: -1;
+}
+@media (max-width: 900px) {
+  .f-about { grid-template-columns: 1fr; }
+  /* En une colonne, le média touche le bord du container : le débord droit de
+     24 px du motif décoratif sortait de l'écran. On le rentre, en gardant le
+     décalage vers le bas qui fait l'effet. */
+  .f-about__media::before { inset: 24px 0 -20px 24px; }
+}
+
+/* ---------- Grille services / produits -------------------------------------------- */
+.svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; counter-reset: svc; }
+.svc-card {
+  position: relative;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  padding: 28px 26px;
+  transition: border-color .3s, box-shadow .3s, transform .3s var(--ease);
+}
+.svc-card::after {
+  counter-increment: svc;
+  content: counter(svc, decimal-leading-zero);
+  position: absolute;
+  top: 24px; right: 24px;
+  font-family: var(--f-mono);
+  font-size: .7rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  color: var(--line);
+  transition: color .3s;
+}
+.svc-card:hover { border-color: rgba(22, 167, 224, .55); box-shadow: var(--sh-md); transform: translateY(-4px); }
+.svc-card:hover::after { color: var(--azure); }
+.svc-card__ic {
+  width: 50px; height: 50px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--r-sm);
+  background: rgba(22, 167, 224, .1);
+  color: var(--azure-dark);
+  margin-bottom: 18px;
+}
+.svc-card h3 { font-size: 1.12rem; }
+.svc-card p { margin-top: 10px; font-size: .93rem; color: var(--muted); }
+@media (max-width: 960px) { .svc-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 580px) { .svc-grid { grid-template-columns: 1fr; } }
+
+/* ---------- Services détaillés (page dédiée) ---------------------------------------- */
+.svc-detail { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.svc-detail__item {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  padding: 30px 30px 26px;
+  transition: border-color .3s, box-shadow .3s, transform .3s var(--ease);
+}
+.svc-detail__item:hover { border-color: rgba(22, 167, 224, .55); box-shadow: var(--sh-md); transform: translateY(-3px); }
+.svc-detail__item .num {
+  font-family: var(--f-mono);
+  font-size: .74rem;
+  font-weight: 600;
+  letter-spacing: .14em;
+  color: var(--azure-dark);
+}
+.svc-detail__item h3 { margin-top: 10px; }
+.svc-detail__item > p { margin-top: 12px; font-size: .96rem; }
+.svc-detail__item .ticks { margin-top: 16px; gap: 8px; font-size: .92rem; color: var(--muted); }
+@media (max-width: 760px) { .svc-detail { grid-template-columns: 1fr; } }
+
+/* ---------- Références --------------------------------------------------------------- */
+.refs { margin-top: clamp(36px, 5vw, 56px); }
+.refs .mono { display: block; color: var(--muted); margin-bottom: 16px; }
+.refs__list { display: flex; flex-wrap: wrap; gap: 10px; }
+
+/* ---------- Page contact --------------------------------------------------------------- */
+.contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.contact-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  padding: 30px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: border-color .3s, box-shadow .3s, transform .3s var(--ease);
+}
+.contact-card:hover { border-color: rgba(22, 167, 224, .55); box-shadow: var(--sh-md); transform: translateY(-4px); }
+.contact-card__ic {
+  width: 48px; height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--r-sm);
+  background: rgba(22, 167, 224, .1);
+  color: var(--azure-dark);
+  margin-bottom: 14px;
+}
+.contact-card h3 { font-size: 1.08rem; }
+.contact-card a { color: var(--body); transition: color .2s; }
+.contact-card a:hover { color: var(--azure-dark); }
+.contact-card .mono { color: var(--muted); font-size: .62rem; margin-bottom: 4px; }
+.contact-card .btn { margin-top: 14px; align-self: flex-start; padding: 11px 20px; font-size: .86rem; }
+@media (max-width: 860px) { .contact-grid { grid-template-columns: 1fr; } }
+
+.contact-note {
+  margin-top: 22px;
+  padding: 18px 24px;
+  border: 1px dashed var(--line);
+  border-radius: var(--r-md);
+  font-size: .92rem;
+  color: var(--muted);
+  background: #fff;
+}
+
+/* ---------- Galerie réalisations filiale (3 tuiles teaser) ---------------------------- */
+.gal-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.gal-3 .tile { aspect-ratio: 4 / 3; }
+@media (max-width: 760px) { .gal-3 { grid-template-columns: 1fr; } }
+
+/* ---------- En-tête filiale en très petit écran -------------------------------------- */
+/* Le chip logo (max 58vw) porte déjà le nom de la filiale ; le sous-titre
+   « Filiale du Groupe NGF » est en nowrap + letter-spacing et faisait déborder
+   l'en-tête de ~9 px sous 400 px de large. */
+@media (max-width: 560px) {
+  .brand--filiale .brand__text { display: none; }
+}

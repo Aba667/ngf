@@ -1,0 +1,41 @@
+Catalogue Naberan 2018 (fournisseur NGF).
+
+Ce qu'il contient, verifie :
+  - photos PAR PRODUIT : 87x126 px, 2 Ko  -> INUTILISABLES en boutique (bouillie une fois agrandies)
+  - photos d'ouverture de section : ~1540x1052 -> excellentes, 1 par famille
+  - plans cotes : vectoriels, nets a toute taille
+  - specs (ref, taille, SWL, cotes A/B/C/D, poids) : texte extractible, ~3000 refs
+
+15 photos de famille ont ete importees dans assets/img/products/ sous le prefixe
+"famille-*" (et non "naberan-*" : le nom du fournisseur ne doit pas apparaitre
+dans le code source de la boutique).
+
+Ecartees volontairement :
+  - p011 (crochets) : "GUNNEBO SWEDEN" moule sur la piece, lisible a taille de carte
+  - p028 (divers BMM) : "BOSS TRAWL RELEASE / MADE IN NORWAY" moule sur la piece
+  -> Levage & manutention utilise p057 a la place.
+
+Sans photo a ce jour : Aquaculture (5) et Crochets & anneaux de senne (4).
+
+--- extraction des specs (juillet 2026) ---
+extract2.py  : lit les blocs produit. La REFERENCE = ce qui se trouve dans la colonne
+               sous l'en-tete "REF" (ou "REF."), quel que soit son prefixe : elles ne
+               commencent pas toutes par 4 (chaines HLL-9-8, flotteurs N-280/6,
+               filets 3NY42). v1 devinait par regex ^4[A-Z] et ratait 5 sections.
+enrichir.py  : manilles, emerillons, anneaux, maillons, cosses  (28 fiches)
+enrichir2.py : poulies, chaines, manchons, flotteurs            (12 fiches)
+
+⚠️ SWL = donnee de SECURITE. Ne jamais la publier sans les DEUX garde-fous :
+   - bloc identifie par (page, cote, 1re ref) : la 1re ref seule ne suffit pas,
+     4PASKT1-1 ouvre 4 blocs differents (p75D, p76D, p77D, p99G) ;
+   - colonne acceptee seulement si elle a EXACTEMENT une valeur par reference,
+     sinon deux colonnes voisines se deversent l'une dans l'autre.
+   Les tableaux n'ont pas tous les memes colonnes : manilles inox = pas de colonne
+   taille + coefficient 6:1, manilles galva = MESURE + 5:1.
+
+NON FAIT, volontairement :
+ - Filets : blocs en double et colonne "taille" qui contient des codes de maille,
+   pas des dimensions. Donnees trop douteuses pour publier.
+ - Poulies simple/double/emerillon/manille : le catalogue classe par USAGE
+   (manoeuvre, portique, netsonde, guide-cable), pas par construction. Aucun
+   recouvrement fiable avec ces 4 fiches.
