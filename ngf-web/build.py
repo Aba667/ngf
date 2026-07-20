@@ -71,13 +71,24 @@ FILIALE_NOMS = {
 # (Victorinox nous a demandé d'abandonner l'ancien domaine victorinox-ngf-groupe.com).
 COUTELLERIE_DOMAIN = f"coutellerie.{MAIN_DOMAIN}"
 
-# Image de partage (WhatsApp, réseaux) par domaine — chemin relatif au site.
+# Image de partage (WhatsApp, réseaux) par domaine — carte 1200x630 avec le LOGO,
+# pour que le logo s'affiche quand on partage le lien (pas une simple photo).
 OG_IMAGES = {
-    MAIN_DOMAIN: "assets/img/media/chalut-mer.jpg",
-    SHOP_DOMAIN: "assets/img/media/chalut-mer.jpg",
-    FILIALES["piriou-ngom"]: "assets/img/realisations/coque-navire.jpg",
-    FILIALES["dees"]: "assets/img/realisations/dees-revetement-cuve.jpg",
-    FILIALES["transit"]: "assets/img/realisations/camion-quai.jpg",
+    MAIN_DOMAIN: "assets/img/brand/share-ngf.jpg",
+    SHOP_DOMAIN: "assets/img/brand/share-ngf.jpg",
+    FILIALES["piriou-ngom"]: "assets/img/brand/share-piriou.jpg",
+    FILIALES["dees"]: "assets/img/brand/share-dees.jpg",
+    FILIALES["transit"]: "assets/img/brand/share-transit.jpg",
+}
+
+# favicon.ico posé à la RACINE de chaque site : les navigateurs (surtout Safari)
+# et les robots de partage demandent /favicon.ico par défaut.
+FAVICONS = {
+    MAIN_DOMAIN: "assets/img/brand/favicon.ico",
+    SHOP_DOMAIN: "assets/img/brand/favicon.ico",
+    FILIALES["piriou-ngom"]: "assets/img/brand/favicon-piriou.ico",
+    FILIALES["dees"]: "assets/img/brand/favicon-dees.ico",
+    FILIALES["transit"]: "assets/img/brand/favicon-transit.ico",
 }
 
 
@@ -204,7 +215,14 @@ def inject_seo(html: str, domain: str, page_path: str) -> str:
     if 'property="og:type"' not in html:
         lines.append('<meta property="og:type" content="website">')
     lines.append(f'<meta property="og:image" content="{og_image}">')
+    # Dimensions de la carte de partage : WhatsApp / Facebook / LinkedIn s'en
+    # servent pour afficher le logo en grand plutôt qu'une vignette.
+    lines.append('<meta property="og:image:width" content="1200">')
+    lines.append('<meta property="og:image:height" content="630">')
     lines.append('<meta name="twitter:card" content="summary_large_image">')
+    lines.append(f'<meta name="twitter:image" content="{og_image}">')
+    # favicon.ico absolu à la racine : fallback universel (Safari, robots de partage).
+    lines.append('<link rel="icon" href="/favicon.ico" sizes="any">')
 
     block = "\n".join(lines) + "\n"
     return html.replace("</head>", block + "</head>", 1)
@@ -229,6 +247,13 @@ def write_robots(site: Path, domain: str) -> None:
     (site / "robots.txt").write_text(
         f"User-agent: *\nAllow: /\n\nSitemap: https://{domain}/sitemap.xml\n",
         encoding="utf-8")
+
+
+def write_favicon_ico(site: Path, domain: str) -> None:
+    """Pose /favicon.ico à la racine du site (fallback universel du navigateur)."""
+    src = FAVICONS.get(domain)
+    if src and (ROOT / src).exists():
+        shutil.copy2(ROOT / src, site / "favicon.ico")
 
 
 def write_shop_root(site: Path) -> None:
@@ -293,6 +318,7 @@ def main() -> int:
     copy_assets(main_dir)
     write_sitemap(main_dir, MAIN_DOMAIN, main_pages)
     write_robots(main_dir, MAIN_DOMAIN)
+    write_favicon_ico(main_dir, MAIN_DOMAIN)
 
     # --- Boutique : shop.ngf-groupe.com --------------------------------------
     # boutique/ garde son dossier → ses liens internes et ses chemins d'assets
@@ -313,6 +339,7 @@ def main() -> int:
     write_shop_root(shop_dir)
     write_sitemap(shop_dir, SHOP_DOMAIN, shop_pages)
     write_robots(shop_dir, SHOP_DOMAIN)
+    write_favicon_ico(shop_dir, SHOP_DOMAIN)
 
     # --- Filiales ------------------------------------------------------------
     for slug, domain in FILIALES.items():
@@ -332,6 +359,7 @@ def main() -> int:
         copy_assets(site)
         write_sitemap(site, domain, pages)
         write_robots(site, domain)
+        write_favicon_ico(site, domain)
 
     # --- Coutellerie (ex-Victorinox) : site autonome, copié tel quel ----------
     # (design + assets propres, liens internes relatifs, self-refs déjà en
@@ -344,6 +372,10 @@ def main() -> int:
         cout_pages = [p.name for p in sorted(cout_src.glob("*.html"))]
         write_sitemap(cout_dir, COUTELLERIE_DOMAIN, cout_pages)
         write_robots(cout_dir, COUTELLERIE_DOMAIN)
+        # favicon.ico à la racine (le site coutellerie garde le sien dans photos/)
+        ico = cout_src / "photos" / "favicon.ico"
+        if ico.exists():
+            shutil.copy2(ico, cout_dir / "favicon.ico")
 
     # --- Contrôle : plus aucun chemin relatif sortant --------------------------
     leaks = []

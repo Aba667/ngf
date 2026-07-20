@@ -243,3 +243,8 @@
 @media (max-width: 560px) {
   .brand--filiale .brand__text { display: none; }
 }
+
+/* Galerie 2 photos (ex. réception présidentielle sur l'accueil Piriou) */
+.gal-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.gal-2 .tile { aspect-ratio: 16 / 10; }
+@media (max-width: 680px) { .gal-2 { grid-template-columns: 1fr; } }

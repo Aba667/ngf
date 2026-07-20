@@ -56,9 +56,9 @@ const PRODUCTS = [
     desc: "2 temps 44,1 kW, F-N-R, réservoir 24 L, le plus puissant de la gamme, pour grandes embarcations." },
 
   /* ----- Lubrifiants (marque Siroil) ----- */
-  { ref: "LUB-SIROIL", cat: "Lubrifiants", name: "Huiles & lubrifiants Siroil", img: "huile-siroil-stock.jpg",
+  { ref: "LUB-SIROIL", cat: "Lubrifiants", name: "Huiles Siroil, en fûts", img: "siroil-futs-noirs.jpg",
     flag: "",
-    desc: "Gamme d'huiles et de lubrifiants de la marque Siroil, réceptionnée et disponible en stock à Dakar. Demandez les références et conditionnements." },
+    desc: "Lubrifiants de la marque Siroil, en fûts (bidons de 200 L). Réceptionnés et disponibles en stock à Dakar. Demandez les références et les grades." },
   { ref: "LUB-HAFA-SEA", cat: "Lubrifiants", name: "HAFA Seaway, gamme nautique", img: "hafa-seaway.jpg", flag: "",
     desc: "Huiles moteur et inverseur pour la plaisance et la pêche : Seateam IB 4T 15W-40 et inverseur SAE 30. Bidons 2 et 5 L." },
   { ref: "LUB-HAFA-WOM", cat: "Lubrifiants", name: "HAFA Womac, engins TP & agricoles", img: "hafa-womac-tp-agricole.jpg", flag: "",

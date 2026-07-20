@@ -1,0 +1,7 @@
+# Archives de déploiement : régénérées à chaque build depuis dist/.
+# Déjà compressées, donc Git les stocke en entier à chaque version (~218 Mo
+# par build). On les garde en local pour cPanel, hors du dépôt.
+ngf-web/deploy/*.zip
+
+# Fichiers système macOS
+.DS_Store
