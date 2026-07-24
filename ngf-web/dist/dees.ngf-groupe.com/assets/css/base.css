@@ -16,13 +16,23 @@
   --azure-dark: #0e86b8;
   --azure-light: #7fd0f2;
 
+  /* Rappel marin : le turquoise ne sert qu'aux fonds et aux lavis,
+     l'azur du logo reste la seule couleur d'accent (liens, puces, boutons).
+     Les quatre variables ci-dessous sont le seul point d'entrée du thème :
+     chaque filiale les redéfinit sur son <body> (voir filiale.css).          */
+  --wash-a: rgba(20, 179, 196, .17);   /* lavis principal des sections claires */
+  --wash-b: rgba(22, 167, 224, .13);   /* lavis secondaire, coin opposé */
+  --deep-sea: linear-gradient(158deg, var(--navy-950) 0%, var(--navy-900) 46%, #0a3f56 100%);
+  --footer-deep: #06283a;              /* bas du dégradé de pied de page */
+  --accent-bar: linear-gradient(90deg, var(--azure) 0%, #14b3c4 44%, var(--navy-700) 100%);
+
   /* Neutres */
   --ink: #101828;
   --body: #45536b;
   --muted: #68758e;
-  --line: #e2e8f2;
+  --line: #dde8ee;
   --bg: #ffffff;
-  --bg-soft: #f4f7fb;
+  --bg-soft: #e9f4f7;
 
   /* Typographie */
   --f-head: "Archivo", -apple-system, "Segoe UI", sans-serif;
@@ -120,8 +130,15 @@ strong { color: var(--ink); font-weight: 600; }
 /* ---------- Mise en page --------------------------------------------------- */
 .container { width: 100%; max-width: var(--container); margin-inline: auto; padding-inline: var(--gutter); }
 .section { padding-block: var(--section-y); }
-.section--soft { background: var(--bg-soft); }
-.section--navy { background: var(--navy-900); }
+/* Fond « mer » : aplat turquoise très clair réveillé par deux lavis diagonaux,
+   pour que la section respire au lieu de paraître grise. */
+.section--soft {
+  background:
+    radial-gradient(115% 85% at 6% -12%, var(--wash-a), transparent 60%),
+    radial-gradient(95% 72% at 100% 112%, var(--wash-b), transparent 62%),
+    var(--bg-soft);
+}
+.section--navy { background: var(--deep-sea); }
 .section--navy :is(h2, h3) { color: #fff; }
 .section--navy p { color: rgba(226, 236, 248, .78); }
 
@@ -174,13 +191,17 @@ strong { color: var(--ink); font-weight: 600; }
 .btn svg { flex: none; }
 
 .btn--azure { background: var(--azure); border-color: var(--azure); }
-.btn--azure:hover { background: var(--azure-dark); border-color: var(--azure-dark); }
+.btn--azure:hover {
+  background: var(--azure-dark);
+  border-color: var(--azure-dark);
+  box-shadow: 0 8px 22px rgba(22, 167, 224, .3);
+}
 
 .btn--ghost { background: transparent; color: var(--navy-800); border-color: var(--line); }
 .btn--ghost:hover { background: var(--bg-soft); border-color: var(--navy-800); box-shadow: none; }
 
 .btn--white { background: #fff; color: var(--navy-800); border-color: #fff; }
-.btn--white:hover { background: #eef4fb; border-color: #eef4fb; }
+.btn--white:hover { background: #e6f4f8; border-color: #e6f4f8; }
 
 .btn--outline-light { background: transparent; color: #fff; border-color: rgba(255, 255, 255, .38); }
 .btn--outline-light:hover { background: rgba(255, 255, 255, .1); border-color: #fff; box-shadow: none; }

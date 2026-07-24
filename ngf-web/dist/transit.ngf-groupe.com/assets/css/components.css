@@ -6,7 +6,11 @@
 
 /* ---------- Topbar (coordonnées) ------------------------------------------ */
 .topbar {
-  background: var(--navy-950);
+  /* Filet de 3 px en tout haut de page : la signature couleur du site
+     (mer pour le Groupe, métier pour chaque filiale), posée sur le navy. */
+  background:
+    var(--accent-bar) top center / 100% 3px no-repeat,
+    var(--navy-950);
   color: rgba(226, 236, 248, .75);
   font-family: var(--f-mono);
   font-size: .68rem;
@@ -35,7 +39,10 @@
      élément collant est recalculé à chaque frame et rend le scroll saccadé. */
   background: rgba(255, 255, 255, .98);
   border-bottom: 1px solid var(--line);
+  transition: box-shadow .3s var(--ease);
 }
+/* Une fois la page défilée, l'en-tête se détache du contenu qui passe dessous. */
+.site-header.is-compact { box-shadow: 0 10px 30px rgba(7, 30, 62, .08); }
 .site-header__inner {
   display: flex;
   align-items: center;
@@ -145,7 +152,7 @@ body.nav-open .nav-toggle b:nth-child(3) { transform: translateY(-7px) rotate(-4
 /* ---------- Bandeau de page interne (sous-pages) --------------------------- */
 .page-hero {
   position: relative;
-  background: var(--navy-900);
+  background: var(--deep-sea);
   padding: clamp(64px, 8vw, 104px) 0 clamp(44px, 6vw, 72px);
   overflow: hidden;
 }
@@ -246,7 +253,7 @@ body.nav-open .nav-toggle b:nth-child(3) { transform: translateY(-7px) rotate(-4
   position: relative;
   overflow: hidden;
   border-radius: var(--r-lg);
-  background: var(--navy-900);
+  background: var(--deep-sea);
   padding: clamp(44px, 6vw, 80px) clamp(28px, 5vw, 72px);
   display: grid;
   grid-template-columns: 1.5fr auto;
@@ -371,9 +378,38 @@ body.nav-open .nav-toggle b:nth-child(3) { transform: translateY(-7px) rotate(-4
 .devis-aside { display: grid; gap: 16px; }
 @media (max-width: 900px) { .devis-wrap { grid-template-columns: 1fr; } }
 
+/* ---------- Retour en haut de page ------------------------------------------
+   Bouton posé par main.js sur les pages longues. Il s'efface tant qu'on est
+   en haut, et remonte au-dessus du panier flottant sur la boutique.        */
+.to-top {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 60;
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: #fff;
+  color: var(--navy-800);
+  cursor: pointer;
+  box-shadow: var(--sh-md);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  transition: opacity .3s var(--ease), transform .3s var(--ease),
+              visibility .3s, background .25s, color .25s, border-color .25s;
+}
+.to-top.is-visible { opacity: 1; visibility: visible; transform: none; }
+.to-top:hover { background: var(--navy-800); border-color: var(--navy-800); color: #fff; }
+.to-top--stacked { bottom: 84px; }
+@media (max-width: 560px) { .to-top { right: 14px; bottom: 14px; } .to-top--stacked { bottom: 80px; } }
+
 /* ---------- Pied de page ---------------------------------------------------- */
 .site-footer {
-  background: var(--navy-950);
+  background: linear-gradient(178deg, var(--navy-950) 0%, var(--footer-deep) 100%);
   color: rgba(226, 236, 248, .72);
   padding-top: clamp(56px, 7vw, 88px);
   font-size: .95rem;

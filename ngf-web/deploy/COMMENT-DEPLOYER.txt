@@ -2,15 +2,24 @@
   DÉPLOIEMENT DES SITES DU GROUPE NGF SUR cPanel (o2switch)
 ========================================================================
 
-Tu as 6 fichiers ZIP, un par site. Chacun se dépose dans le "document root"
-(dossier racine) de son domaine ou sous-domaine.
+Un ZIP par site, à déposer dans le "document root" (dossier racine) de son
+domaine ou sous-domaine. Deux sortes de ZIP, à ne pas confondre.
 
-  ngf-groupe.com.zip            -> domaine principal ngf-groupe.com
-  shop.ngf-groupe.com.zip       -> sous-domaine  shop.ngf-groupe.com
-  piriou.ngf-groupe.com.zip     -> sous-domaine  piriou.ngf-groupe.com
-  dees.ngf-groupe.com.zip       -> sous-domaine  dees.ngf-groupe.com
-  transit.ngf-groupe.com.zip    -> sous-domaine  transit.ngf-groupe.com
-  coutellerie.ngf-groupe.com.zip-> sous-domaine  coutellerie.ngf-groupe.com
+MISE À JOUR (on extrait PAR-DESSUS, sans rien vider) :
+
+  maj-2026-07-24-ngf-groupe.zip   -> domaine principal ngf-groupe.com
+  maj-2026-07-24-shop.zip         -> sous-domaine  shop.ngf-groupe.com
+  maj-2026-07-24-dees.zip         -> sous-domaine  dees.ngf-groupe.com
+  maj-2026-07-24-transit.zip      -> sous-domaine  transit.ngf-groupe.com
+  maj-2026-07-24-coutellerie.zip  -> sous-domaine  coutellerie.ngf-groupe.com
+
+SITE COMPLET (on vide le dossier AVANT d'extraire) :
+
+  maj-2026-07-24-piriou-SITE-COMPLET.zip -> sous-domaine piriou.ngf-groupe.com
+
+  Pourquoi complet pour Piriou : le sous-domaine hébergeait encore une vieille
+  version, sans les balises de partage. Sans elles, un lien Piriou envoyé sur
+  WhatsApp s'affiche sans le logo Piriou. On repart donc du propre.
 
 
 ÉTAPES DANS cPanel (les mêmes pour chaque ZIP)
@@ -24,16 +33,31 @@ Tu as 6 fichiers ZIP, un par site. Chacun se dépose dans le "document root"
      (Si un doute : cPanel -> "Sous-domaines", la colonne
       "Racine du document" donne le chemin exact de chacun.)
 
-3. Vider l'ancien contenu du dossier (s'il y en a un), pour repartir propre.
+3. Seulement pour un ZIP "SITE-COMPLET" : vider l'ancien contenu du dossier.
+   Pour un ZIP "maj", ne rien supprimer, les fichiers seront remplacés.
 
 4. Bouton "Téléverser" (Upload) -> envoyer le ZIP du site.
 
 5. De retour dans le dossier, clic droit sur le ZIP -> "Extraire" (Extract).
    Les fichiers se placent directement dans le dossier racine.
+   S'il demande de confirmer le remplacement, accepter.
 
 6. Supprimer le fichier ZIP une fois extrait.
 
-7. Ouvrir le site dans le navigateur pour vérifier.
+7. Ouvrir le site dans le navigateur pour vérifier. Si l'ancienne mise en
+   page s'affiche encore, recharger avec Ctrl+F5 (Cmd+Maj+R sur Mac) : le
+   navigateur garde les feuilles de style en cache.
+
+
+APRÈS LA MISE EN LIGNE DE PIRIOU : l'aperçu WhatsApp
+------------------------------------------------------------------------
+WhatsApp garde en mémoire l'aperçu d'un lien pendant plusieurs jours. Pour
+le forcer à relire la page, partager une fois l'adresse avec un paramètre
+en plus, par exemple :
+
+  https://piriou.ngf-groupe.com/?v=2
+
+L'aperçu doit alors montrer la carte au logo PIRIOU NGOM-SENEGAL.
 
 
 IMPORTANT : les formulaires de contact et de devis (.php)
@@ -49,5 +73,7 @@ indésirables du destinataire. Si ça arrive, regarde le dossier Spam, et au
 besoin l'hébergeur peut régler l'authentification (SPF) pour ces adresses.
 
 
-Ces ZIP sont régénérés à chaque "python3 build.py". Ne pas modifier leur
-contenu à la main : éditer les sources dans ngf-web/ puis relancer le build.
+Ne pas modifier le contenu d'un ZIP à la main : on édite les sources dans
+ngf-web/, on relance "python3 build.py" (qui régénère dist/), puis on
+refabrique les ZIP depuis dist/. Les ZIP restent en local, hors du dépôt
+Git, parce qu'ils sont déjà compressés et pèsent lourd à chaque version.

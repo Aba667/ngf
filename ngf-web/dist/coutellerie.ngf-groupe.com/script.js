@@ -361,17 +361,29 @@ const catalogueProduits = {
         }
     ],
     viande: [
-        { nom: "Couteau à Désosser Fibrox Rouge", reference: "5.6001.15", prix: "20 000 FCFA", image: "photos/5615.JPEG", description: "Couteau à désosser à lame étroite de 15 cm et manche Fibrox antidérapant, pour un désossage net et précis de la viande." },
-        { nom: "Couteau à Désosser Fibrox Bleu", reference: "5.6002.15", prix: "20 000 FCFA", image: "photos/56215.JPEG", description: "Couteau à désosser à lame de 15 cm et manche Fibrox bleu (codage couleur HACCP), pour une découpe professionnelle et hygiénique." },
-        { nom: "Couteau à Désosser Fibrox Noir", reference: "5.6003.15", prix: "20 000 FCFA", image: "photos/56315.JPEG", description: "Couteau à désosser à lame de 15 cm et manche Fibrox noir antidérapant, robuste et précis pour les professionnels de la viande." },
-        { nom: "Couteau à Saigner Fibrox Rouge", reference: "5.5501.18", prix: "20 000 FCFA", image: "photos/5518.JPEG", description: "Couteau à saigner à lame pointue et rigide de 18 cm, conçu pour l'abattage et la saignée dans le respect des règles d'hygiène." },
-        { nom: "Couteau à Saigner Fibrox Bleu", reference: "5.5502.18", prix: "20 000 FCFA", image: "photos/55218.JPEG", description: "Couteau à saigner à lame de 18 cm et manche Fibrox bleu, robuste et précis pour un usage professionnel intensif." },
+        { nom: "Couteau à Désosser Fibrox Rouge", reference: "5.6001.15", prix: "15 000 FCFA", image: "photos/5615.JPEG", description: "Couteau à désosser à lame étroite de 15 cm et manche Fibrox antidérapant, pour un désossage net et précis de la viande." },
+        { nom: "Couteau à Désosser Fibrox Bleu", reference: "5.6002.15", prix: "15 000 FCFA", image: "photos/56215.JPEG", description: "Couteau à désosser à lame de 15 cm et manche Fibrox bleu (codage couleur HACCP), pour une découpe professionnelle et hygiénique." },
+        { nom: "Couteau à Désosser Fibrox Noir", reference: "5.6003.15", prix: "15 000 FCFA", image: "photos/56315.JPEG", description: "Couteau à désosser à lame de 15 cm et manche Fibrox noir antidérapant, robuste et précis pour les professionnels de la viande." },
+        { nom: "Couteau à Saigner Fibrox Rouge", reference: "5.5501.18", prix: "18 000 FCFA", image: "photos/5518.JPEG", description: "Couteau à saigner à lame pointue et rigide de 18 cm, conçu pour l'abattage et la saignée dans le respect des règles d'hygiène." },
+        { nom: "Couteau à Saigner Fibrox Bleu", reference: "5.5502.18", prix: "18 000 FCFA", image: "photos/55218.JPEG", description: "Couteau à saigner à lame de 18 cm et manche Fibrox bleu, robuste et précis pour un usage professionnel intensif." },
         { nom: "Couteau Boucher Fibrox Noir (18 cm)", reference: "5.7403.18", prix: "20 000 FCFA", image: "photos/5718.JPEG", description: "Couteau de boucher professionnel à lame large de 18 cm, idéal pour parer, dépecer et trancher avec puissance." },
-        { nom: "Couteau Boucher Fibrox Noir (20 cm)", reference: "5.7403.20", prix: "20 000 FCFA", image: "photos/5720.JPEG", description: "Couteau de boucher professionnel à lame de 20 cm, parfait équilibre entre précision et puissance pour la découpe des grosses pièces." },
-        { nom: "Couteau Boucher Fibrox Noir (25 cm)", reference: "5.7403.25", prix: "20 000 FCFA", image: "photos/5725.JPEG", description: "Couteau de boucher à grande lame de 25 cm, conçu pour dépecer et trancher les pièces les plus volumineuses." },
-        { nom: "Couteau à Volaille Nylon Noir", reference: "5.5103.10", prix: "20 000 FCFA", image: "photos/5510.JPEG", description: "Couteau à volaille robuste à manche nylon, idéal pour désosser et découper la volaille." },
-        { nom: "Couperet de Cuisine", reference: "5.4003.18", prix: "20 000 FCFA", image: "photos/5418.JPEG", description: "Couperet puissant à lame large de 18 cm pour hacher et trancher la viande avec efficacité." },
-        { nom: "Couteau à Découper Fibrox", reference: "5.2003.22", prix: "20 000 FCFA", image: "photos/5222.JPEG", description: "Couteau à découper à lame de 22 cm et manche Fibrox antidérapant, conçu pour trancher viandes et rôtis avec aisance." }
+        { nom: "Couteau Boucher Fibrox Noir (20 cm)", reference: "5.7403.20", prix: "22 000 FCFA", image: "photos/5720.JPEG", description: "Couteau de boucher professionnel à lame de 20 cm, parfait équilibre entre précision et puissance pour la découpe des grosses pièces." },
+        { nom: "Couteau Boucher Fibrox Noir (25 cm)", reference: "5.7403.25", prix: "25 000 FCFA", image: "photos/5725.JPEG", description: "Couteau de boucher à grande lame de 25 cm, conçu pour dépecer et trancher les pièces les plus volumineuses." },
+        { nom: "Couteau à Volaille Nylon Noir", reference: "5.5103.10", prix: "13 000 FCFA", image: "photos/5510.JPEG", description: "Couteau à volaille robuste à manche nylon, idéal pour désosser et découper la volaille." },
+        {
+            nom: "Couperet de Cuisine",
+            reference: "5.4003.18",
+            prix: "33 000 FCFA",
+            image: "photos/5418.JPEG",
+            images: [
+                "photos/5418.JPEG",
+                "photos/5.4003.18-lame.jpg",
+                "photos/5.4063.18-chinois.jpg",
+                "photos/couperets-catalogue.jpg"
+            ],
+            description: "Couperet puissant à lame large de 18 cm pour hacher et trancher la viande avec efficacité. Disponible en version 320 g (5.4003.18) et 600 g (5.4003.19), ainsi qu'en version chinoise (5.4063.18) pour hacher, trancher et émincer avec précision."
+        },
+        { nom: "Couteau à Découper Fibrox", reference: "5.2003.22", prix: "22 000 FCFA", image: "photos/5222.JPEG", description: "Couteau à découper à lame de 22 cm et manche Fibrox antidérapant, conçu pour trancher viandes et rôtis avec aisance." }
     ],
     couteaux_cuisine: [
         {
@@ -396,8 +408,8 @@ const catalogueProduits = {
                 "Fabriqué en Suisse 🇨🇭"
             ]
         },
-        { nom: "Swiss Classic, Couteau d'Office 10 cm Lisse", reference: "6.7704.C1", prix: "20 000 FCFA", image: "photos/67C1.JPEG", description: "Couteau d'office polyvalent à lame lisse de 10 cm, idéal pour éplucher, parer et trancher au quotidien." },
-        { nom: "Swiss Classic, Couteau d'Office 10 cm", reference: "6.7705.C1", prix: "20 000 FCFA", image: "photos/675C1.JPEG", description: "Couteau d'office Swiss Classic de 10 cm, maniable et précis pour tous les petits travaux de cuisine." },
+        { nom: "Swiss Classic, Couteau d'Office 10 cm Lisse", reference: "6.7704.C1", prix: "3 500 FCFA", image: "photos/67C1.JPEG", description: "Couteau d'office polyvalent à lame lisse de 10 cm, idéal pour éplucher, parer et trancher au quotidien." },
+        { nom: "Swiss Classic, Couteau d'Office 10 cm", reference: "6.7705.C1", prix: "1 000 FCFA", prixNote: "Les 7 pour 5 000 FCFA", image: "photos/675C1.JPEG", description: "Couteau d'office Swiss Classic de 10 cm, maniable et précis pour tous les petits travaux de cuisine." },
         { nom: "Couteau à Décorer", reference: "7.6054.3", prix: "Prix sur demande", image: "photos/7.6054.3.jpg", description: "Couteau à décorer à denture plate de 4 mm, lame de 8,5 cm. Idéal pour la présentation des fruits et légumes." },
         { nom: "Couteau à Décorer Forgé", reference: "7.6052 / 7.6053.3", prix: "Prix sur demande", image: "photos/7.6053.3.jpg", description: "Couteau à décorer forgé à denture profonde de 5 mm, lame de 11 cm. Manche bois lamellé (7.6052) ou synthétique sans rivets (7.6053.3)." },
         { nom: "Couteau à Huîtres, Manche Bois", reference: "7.6391 / 7.6392", prix: "Prix sur demande", image: "photos/7.6391.jpg", description: "Couteau à huîtres avec garde de protection. Manche en bois lamellé (7.6391) ou synthétique noir (7.6392)." },
@@ -571,11 +583,7 @@ const catalogueProduits = {
         { nom: "Ouvre-Bouteilles PET / Décapsuleur", reference: "7.6912 / 7.6912.3", prix: "Prix sur demande", image: "photos/7.6912.3.jpg", description: "Décapsuleur avec ouvre-bouteilles PET intégré. Rouge (7.6912) ou noir (7.6912.3)." },
         
         
-        { nom: "Aiguille à Brider", reference: "7.7340 / 7.7342 / 7.7343", prix: "Prix sur demande", image: "photos/7.7340.jpg", description: "Aiguille à brider en inox : droite 18 cm (7.7340), droite 24 cm (7.7342) ou courbée 20 cm (7.7343)." },
-        { nom: "Aiguille à Larder", reference: "7.7347 / 7.7348", prix: "Prix sur demande", image: "photos/7.7347.jpg", description: "Aiguille à larder courbée en inox : 16 cm (7.7347) ou 24 cm (7.7348)." },
-        { nom: "Set de 10 Douilles Unies", reference: "7.6700", prix: "Prix sur demande", image: "photos/7.6700.jpg", description: "Set de 10 douilles à pâtisserie unies en inox, tailles assorties." },
-        { nom: "Set de 10 Douilles à Décorer", reference: "7.6750", prix: "Prix sur demande", image: "photos/7.6750.jpg", description: "Set de 10 douilles cannelées en inox pour la décoration, tailles assorties." },
-        { nom: "Poche à Douille 43 cm", reference: "7.6760", prix: "Prix sur demande", image: "photos/7.6760.jpg", description: "Poche à douille de 43 cm en coton enduit de polyuréthane, résistante à l'ébullition." }
+        
     ],
     accessoires: [
         {
@@ -638,20 +646,10 @@ const catalogueProduits = {
             dimensions: "Deux disques en céramique · Pré-aiguisage + aiguisage de précision · Gauchers et droitiers"
         },
         { nom: "Fusil de Ménage Rond", reference: "7.8003 / 7.8013 / 7.8033", prix: "Prix sur demande", image: "photos/7.8003.jpg", description: "Fusil de ménage rond, taille mi-fine. Longueurs disponibles : 18 cm (7.8003), 20 cm (7.8013) ou 23 cm (7.8033)." },
-        { nom: "Fusil de Ménage Ovale, Manche Hêtre", reference: "7.8020", prix: "Prix sur demande", image: "photos/7.8020.jpg", description: "Fusil de ménage ovale de 20 cm, taille mi-fine, manche en bois de hêtre." },
-        { nom: "Fusil de Ménage, Manche Palissandre", reference: "7.8210", prix: "Prix sur demande", image: "photos/7.8210.jpg", description: "Fusil de ménage rond de 20 cm, taille mi-fine, manche en palissandre." },
+        
         { nom: "Fusil de Ménage Rond 20 cm", reference: "7.8213", prix: "Prix sur demande", image: "photos/7.8213.jpg", description: "Fusil de ménage rond de 20 cm, taille mi-fine, manche synthétique." },
-        { nom: "Fusil de Cuisine Rond 25 cm", reference: "7.8303", prix: "Prix sur demande", image: "photos/7.8303.jpg", description: "Fusil de cuisine rond de 25 cm, taille mi-fine." },
-        { nom: "Fusil de Cuisine Diamanté", reference: "7.8313 / 7.8323", prix: "Prix sur demande", image: "photos/7.8323.jpg", description: "Fusil de cuisine ovale à revêtement diamant : 23 cm (7.8313) ou 26 cm (7.8323)." },
-        { nom: "Fusil de Cuisine Diamanté 27 cm", reference: "7.8327", prix: "Prix sur demande", image: "photos/7.8327.jpg", description: "Fusil de cuisine ovale de 27 cm à revêtement diamant." },
-        { nom: "Fusil de Cuisine, Manche Hêtre 27 cm", reference: "7.8330 / 7.8340", prix: "Prix sur demande", image: "photos/7.8330.jpg", description: "Fusil de cuisine de 27 cm, taille mi-fine, manche en hêtre. Rond (7.8330) ou ovale (7.8340)." },
-        { nom: "Fusil de Cuisine 27 cm", reference: "7.8333 / 7.8343", prix: "Prix sur demande", image: "photos/7.8333.jpg", description: "Fusil de cuisine de 27 cm, taille mi-fine. Rond (7.8333) ou ovale (7.8343)." },
-        { nom: "Fusil de Cuisine Professionnel 27 cm", reference: "7.8403", prix: "Prix sur demande", image: "photos/7.8403.jpg", description: "Fusil de cuisine rond de 27 cm, taille mi-fine, avec garde boule. Le même modèle que dans la mallette de chef." },
-        { nom: "Fusil de Boucher 30 cm", reference: "7.8413 / 7.8423", prix: "Prix sur demande", image: "photos/7.8413.jpg", description: "Fusil de boucher de 30 cm, taille mi-fine. Rond (7.8413) ou ovale (7.8423)." },
-        { nom: "Fusil de Boucher Fin 30 cm", reference: "7.8513 / 7.8523", prix: "Prix sur demande", image: "photos/7.8513.jpg", description: "Fusil de boucher de 30 cm, taille fine. Rond (7.8513) ou ovale (7.8523)." },
-        { nom: "Fusil de Boucher, Manche Hêtre 30 cm", reference: "7.8620", prix: "Prix sur demande", image: "photos/7.8620.jpg", description: "Fusil de boucher ovale de 30 cm, taille micro-fine, manche en bois de hêtre." },
-        { nom: "Fusil de Boucher Micro-Fin 30 cm", reference: "7.8623", prix: "Prix sur demande", image: "photos/7.8623.jpg", description: "Fusil de boucher ovale de 30 cm, taille micro-fine, manche synthétique." },
-        { nom: "Aiguiseur Duo Céramique", reference: "7.8553", prix: "Prix sur demande", image: "photos/7.8553.jpg", description: "Aiguiseur rond à deux disques céramique : bleu grain 360 (dégrossissage) et blanc grain 1000 (finition). 26 cm." }
+    
+        
     ]
 };
 
@@ -958,6 +956,7 @@ function initProductPage() {
                         <p class="product-ref">Réf : ${escapeHtml(prod.reference)}</p>
                         <div class="product-bottom">
                             <p class="product-price${prixSurDemande(prod) ? ' sur-demande' : ''}">${escapeHtml(prod.prix || 'Prix sur demande')}</p>
+                            ${prod.prixNote ? `<p class="product-price-note">${escapeHtml(prod.prixNote)}</p>` : ''}
                             <span class="product-cta">Voir le produit <i class="fa-solid fa-arrow-right"></i></span>
                         </div>
                     `;
@@ -1046,7 +1045,10 @@ function createProductModal() {
                 <ul class="pm-features"></ul>
                 <p class="pm-dims"></p>
                 <div class="pm-buy-row">
-                    <p class="pm-price"></p>
+                    <div class="pm-price-wrap">
+                        <p class="pm-price"></p>
+                        <p class="pm-price-note"></p>
+                    </div>
                     <a class="btn-whatsapp pm-buy" href="#" target="_blank" rel="noopener">
                         <i class="fa-brands fa-whatsapp"></i> Commander sur WhatsApp
                     </a>
@@ -1221,6 +1223,10 @@ function openProductModal(prod) {
     const priceEl = modal.querySelector('.pm-price');
     priceEl.textContent = prod.prix || 'Prix sur demande';
     priceEl.classList.toggle('sur-demande', prixSurDemande(prod));
+
+    const priceNoteEl = modal.querySelector('.pm-price-note');
+    priceNoteEl.textContent = prod.prixNote || '';
+    priceNoteEl.style.display = prod.prixNote ? '' : 'none';
 
     const descEl = modal.querySelector('.pm-desc');
     descEl.textContent = prod.description || '';

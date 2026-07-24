@@ -23,7 +23,10 @@
 .hero-h__media img { width: 100%; height: 100%; object-fit: cover; }
 .hero-h__overlay {
   position: absolute; inset: 0; z-index: -1;
+  /* Le lavis turquoise passe devant le voile marine : il ne colore que la
+     partie droite, là où la photo de mer reste visible. */
   background:
+    radial-gradient(70% 82% at 86% 22%, var(--wash-a), transparent 60%),
     linear-gradient(92deg, rgba(4, 18, 42, .92) 0%, rgba(4, 18, 42, .6) 46%, rgba(4, 18, 42, .16) 100%),
     linear-gradient(0deg, rgba(4, 18, 42, .6) 0%, transparent 32%);
 }
@@ -201,11 +204,14 @@
    Présentation galerie : photos bien séparées, légende posée sous l'image. */
 .locaux-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   gap: clamp(28px, 4vw, 52px);
 }
 
-.local-card { display: block; }
+/* Cinq photos : trois sur la première ligne, deux centrées sur la seconde. */
+.local-card { display: block; grid-column: span 2; }
+.local-card:nth-child(4) { grid-column: 2 / span 2; }
+.local-card:nth-child(5) { grid-column: 4 / span 2; }
 
 .local-card .ph {
   aspect-ratio: 3 / 4;
@@ -253,13 +259,20 @@
 
 @media (max-width: 860px) {
   .locaux-grid { grid-template-columns: 1fr 1fr; gap: clamp(24px, 4vw, 36px); }
-  .local-card:last-child { grid-column: span 2; }
-  .local-card:last-child .ph { aspect-ratio: 16 / 10; }
+  .local-card,
+  .local-card:nth-child(4),
+  .local-card:nth-child(5) { grid-column: auto; }
+  /* Nombre impair de photos : la dernière reste centrée, au format des autres. */
+  .local-card:last-child {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: 100%;
+    max-width: 46%;
+  }
 }
 @media (max-width: 520px) {
   .locaux-grid { grid-template-columns: 1fr; }
-  .local-card:last-child { grid-column: span 1; }
-  .local-card:last-child .ph { aspect-ratio: 3 / 4; }
+  .local-card:last-child { grid-column: auto; max-width: none; }
 }
 
 /* ---------- ÉQUIPEMENTS (maison mère) ---------------------------------------- */
@@ -277,7 +290,7 @@
 .dom-card__img { aspect-ratio: 16 / 10.5; overflow: hidden; }
 .dom-card__img img { width: 100%; height: 100%; object-fit: cover; transition: transform .7s var(--ease); }
 /* Visuel produit détouré (moteur) : afficher en entier sur un fond doux */
-.dom-card__img--motor { background: radial-gradient(120% 120% at 50% 12%, #eef4fb, #d7e4f3 75%, #cbdaee); }
+.dom-card__img--motor { background: radial-gradient(120% 120% at 50% 12%, #eef8fa, #d2e8ee 75%, #c3dde6); }
 .dom-card__img--motor img { object-fit: contain; padding: 10px 10px 0; }
 .dom-card:hover .dom-card__img img { transform: scale(1.06); }
 .dom-card__body { display: flex; flex-direction: column; flex: 1; padding: 22px 22px 24px; }
@@ -526,7 +539,7 @@ a.tile:hover .tile__go { background: var(--azure); }
   position: relative;
   overflow: hidden;
   border-radius: var(--r-lg);
-  background: var(--navy-900);
+  background: var(--deep-sea);
   padding: clamp(44px, 6vw, 76px) clamp(28px, 5vw, 72px) clamp(36px, 5vw, 56px);
 }
 .contact-band::before {

@@ -110,6 +110,31 @@
     spied.forEach(function (s) { spy.observe(s); });
   }
 
+  /* --- Retour en haut de page ---------------------------------------------- */
+  /* Les pages du site sont longues (accueil, réalisations, boutique) : on pose
+     le bouton en JS pour ne pas avoir à l'ajouter dans chaque fichier HTML.
+     Il n'apparaît qu'au-delà d'un écran de défilement, donc jamais sur une
+     page courte, sans avoir à mesurer une hauteur encore incomplète (la
+     boutique remplit sa grille après ce script).                           */
+  (function initToTop() {
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "to-top";
+    btn.setAttribute("aria-label", "Revenir en haut de la page");
+    btn.innerHTML =
+      '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>';
+    // La boutique a déjà un bouton panier flottant dans ce coin : on empile.
+    if (document.querySelector(".cart-fab")) btn.classList.add("to-top--stacked");
+    document.body.appendChild(btn);
+
+    btn.addEventListener("click", function () {
+      window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+    });
+    window.addEventListener("scroll", function () {
+      btn.classList.toggle("is-visible", window.scrollY > window.innerHeight);
+    }, { passive: true });
+  })();
+
   /* --- Année courante ------------------------------------------------------- */
   var y = document.querySelector("[data-year]");
   if (y) y.textContent = new Date().getFullYear();

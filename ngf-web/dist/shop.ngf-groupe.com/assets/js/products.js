@@ -39,19 +39,19 @@ const CATEGORIES = [
 
 const PRODUCTS = [
   /* ----- Moteurs hors-bord Hidea (seuls produits tarifés) ----- */
-  { ref: "MOT-HD8", cat: "Moteurs Hidea", name: "Moteur Hidea HD 8 F, 8 CV", img: "moteur-hidea.jpg",
+  { ref: "MOT-HD8", cat: "Moteurs Hidea", name: "Moteur Hidea HD 8 F, 8 CV", img: "moteur-hidea-8cv.jpg",
     flag: "Tarif", price: "750 000", fiche: "moteurs-hidea.html",
     desc: "Hors-bord 2 temps, 2 cylindres, démarrage manuel, réservoir 12 L, idéal petite pirogue." },
-  { ref: "MOT-HDD15", cat: "Moteurs Hidea", name: "Moteur Hidea HDD 15 F, 15 CV", img: "moteur-hidea.jpg",
+  { ref: "MOT-HDD15", cat: "Moteurs Hidea", name: "Moteur Hidea HDD 15 F, 15 CV", img: "moteur-hidea-15cv.jpg",
     flag: "Tarif", price: "950 000", fiche: "moteurs-hidea.html",
     desc: "2 temps 246 cm³ (11 kW), barre franche, réservoir externe 24 L, pêche artisanale polyvalente." },
-  { ref: "MOT-HD25", cat: "Moteurs Hidea", name: "Moteur Hidea HD 25 F, 25 CV", img: "moteur-hidea.jpg",
+  { ref: "MOT-HD25", cat: "Moteurs Hidea", name: "Moteur Hidea HD 25 F, 25 CV", img: "moteur-hidea-25cv.jpg",
     flag: "Tarif", price: "1 680 000", fiche: "moteurs-hidea.html",
     desc: "2 temps 496 cm³ (18,4 kW), F-N-R, réservoir 24 L, bon compromis puissance / consommation." },
-  { ref: "MOT-G40", cat: "Moteurs Hidea", name: "Moteur Hidea G 40 F, 40 CV", img: "moteur-hidea.jpg",
+  { ref: "MOT-G40", cat: "Moteurs Hidea", name: "Moteur Hidea G 40 F, 40 CV", img: "moteur-hidea-40cv.jpg",
     flag: "Tarif", price: "1 700 000", fiche: "moteurs-hidea.html",
     desc: "2 temps 669 cm³ (29,4 kW), démarrage manuel, réservoir 24 L, pirogues de mer et charges lourdes." },
-  { ref: "MOT-HD60", cat: "Moteurs Hidea", name: "Moteur Hidea HD 60 F, 60 CV", img: "moteur-hidea.jpg",
+  { ref: "MOT-HD60", cat: "Moteurs Hidea", name: "Moteur Hidea HD 60 F, 60 CV", img: "moteur-hidea-60cv.jpg",
     flag: "Tarif", price: "3 140 000", fiche: "moteurs-hidea.html",
     desc: "2 temps 44,1 kW, F-N-R, réservoir 24 L, le plus puissant de la gamme, pour grandes embarcations." },
 

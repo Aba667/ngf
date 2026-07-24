@@ -4,6 +4,43 @@
    Utilisé par : victorinox, transit, transport, dees, piriou-ngom.
    ========================================================================== */
 
+/* ---------- Fond propre à chaque filiale ------------------------------------
+   Le Groupe garde le turquoise de la mer ; chaque filiale reprend la teinte
+   de son métier. Seuls les FONDS changent (sections claires, bandeaux sombres,
+   pied de page, voile du hero) : la typo, les liens et les boutons restent à
+   l'azur du logo, sinon les cinq sites cessent de faire famille.
+   La coutellerie (Victorinox) a son propre design, elle n'est pas concernée. */
+
+/* Piriou Ngom Sénégal, chantier naval : bleu océan, coque et haute mer. */
+body.f-piriou {
+  --bg-soft: #e5edf9;
+  --wash-a: rgba(20, 88, 168, .18);
+  --wash-b: rgba(22, 167, 224, .12);
+  --deep-sea: linear-gradient(158deg, var(--navy-950) 0%, var(--navy-900) 46%, #0d3c6e 100%);
+  --footer-deep: #072c4e;
+  --accent-bar: linear-gradient(90deg, var(--azure) 0%, #2c74c6 46%, var(--navy-800) 100%);
+}
+
+/* DEES, génie industriel : ambre d'atelier, étincelles de meuleuse et acier. */
+body.f-dees {
+  --bg-soft: #f6f2ea;
+  --wash-a: rgba(196, 124, 38, .16);
+  --wash-b: rgba(22, 167, 224, .09);
+  --deep-sea: linear-gradient(158deg, var(--navy-950) 0%, #101c2c 46%, #3d2b16 100%);
+  --footer-deep: #241a10;
+  --accent-bar: linear-gradient(90deg, var(--azure) 0%, #c9832a 52%, #7a4a12 100%);
+}
+
+/* NGF Transit, transit et consignation : vert de fluidité, marchandise dédouanée. */
+body.f-transit {
+  --bg-soft: #e7f3f0;
+  --wash-a: rgba(13, 146, 124, .15);
+  --wash-b: rgba(22, 167, 224, .11);
+  --deep-sea: linear-gradient(158deg, var(--navy-950) 0%, var(--navy-900) 46%, #08483f 100%);
+  --footer-deep: #06302a;
+  --accent-bar: linear-gradient(90deg, var(--azure) 0%, #12a37f 48%, #0a4f43 100%);
+}
+
 /* ---------- Marque filiale dans l'en-tête -----------------------------------
    Les logos détourés vont jusqu'au ratio 6:1 (NGF Transit) : on borne la
    largeur autant que la hauteur, sinon l'en-tête déborde sur mobile.     */
@@ -34,7 +71,10 @@
 .f-hero__media img { width: 100%; height: 100%; object-fit: cover; }
 .f-hero__overlay {
   position: absolute; inset: 0; z-index: -1;
+  /* Le lavis de la filiale passe DEVANT le voile marine : il ne se voit donc
+     que sur la moitié droite, là où la photo respire. */
   background:
+    radial-gradient(72% 88% at 88% 16%, var(--wash-a), transparent 62%),
     linear-gradient(90deg, rgba(4, 18, 42, .86) 0%, rgba(4, 18, 42, .46) 55%, rgba(4, 18, 42, .18) 100%),
     linear-gradient(0deg, rgba(4, 18, 42, .8) 0%, transparent 48%);
 }

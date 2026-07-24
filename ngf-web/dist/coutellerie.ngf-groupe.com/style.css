@@ -1589,6 +1589,15 @@ footer {
     margin-bottom: 10px;
 }
 
+/* Tarif dégressif (lot) affiché sous le prix unitaire, sur la carte produit */
+.product-price-note {
+    margin-top: -6px;
+    margin-bottom: 10px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-light);
+}
+
 /* Produits catalogue sans tarif affiché */
 .product-price.sur-demande {
     font-size: 1.05rem;
@@ -1902,6 +1911,14 @@ footer {
     font-size: 1.7rem;
     font-weight: 800;
     color: var(--brand-red);
+}
+
+/* Tarif dégressif (lot) affiché sous le prix unitaire */
+.pm-price-note {
+    margin-top: 4px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-light);
 }
 
 .btn-whatsapp {
