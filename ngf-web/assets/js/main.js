@@ -32,6 +32,89 @@
     });
   }
 
+  /* --- Valeurs : galerie éditoriale au clic/focus -------------------------- */
+  (function initValuesGallery() {
+    var stage = document.querySelector("[data-values-stage]");
+    if (!stage) return;
+
+    var cards = Array.prototype.slice.call(stage.querySelectorAll(".value[data-image]"));
+    var image = stage.querySelector("[data-values-image]");
+    var index = stage.querySelector("[data-values-index]");
+    var label = stage.querySelector("[data-values-label]");
+    var title = stage.querySelector("[data-values-title]");
+    var description = stage.querySelector("[data-values-description]");
+    if (!cards.length || !image || !index || !label || !title || !description) return;
+
+    function select(card) {
+      cards.forEach(function (item) {
+        var active = item === card;
+        item.classList.toggle("is-selected", active);
+        item.setAttribute("aria-pressed", active ? "true" : "false");
+      });
+
+      var next = new Image();
+      next.onload = function () {
+        image.classList.add("is-changing");
+        window.setTimeout(function () {
+          image.src = card.getAttribute("data-image");
+          image.alt = card.querySelector("h3").textContent + " — Groupe NGF";
+          index.textContent = String(Number(card.getAttribute("data-value")) + 1).padStart(2, "0") + " / 07";
+          label.textContent = card.getAttribute("data-label");
+          title.textContent = card.getAttribute("data-title");
+          description.textContent = card.getAttribute("data-description");
+          image.classList.remove("is-changing");
+        }, reduceMotion ? 0 : 120);
+      };
+      next.src = card.getAttribute("data-image");
+    }
+
+    cards.forEach(function (card) {
+      card.addEventListener("click", function () { select(card); });
+      card.addEventListener("keydown", function (event) {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          select(card);
+        }
+      });
+    });
+  })();
+
+  /* --- Avant / Après : deux galeries jumelles, chacune feuilletable --------- */
+  (function initCompare() {
+    var panels = document.querySelectorAll("[data-panel]");
+    panels.forEach(function (panel) {
+      var stage = panel.querySelector("[data-panel-stage]");
+      var image = panel.querySelector("[data-panel-image]");
+      var caption = panel.querySelector("[data-panel-caption]");
+      var thumbs = Array.prototype.slice.call(panel.querySelectorAll("[data-panel-thumb]"));
+      if (!stage || !image || !thumbs.length) return;
+
+      function select(thumb) {
+        thumbs.forEach(function (t) {
+          var active = t === thumb;
+          t.classList.toggle("is-active", active);
+          t.setAttribute("aria-pressed", active ? "true" : "false");
+        });
+
+        var next = new Image();
+        next.onload = function () {
+          stage.classList.add("is-changing");
+          window.setTimeout(function () {
+            image.src = thumb.getAttribute("data-image");
+            image.alt = thumb.getAttribute("data-alt") || "";
+            if (caption) caption.textContent = thumb.getAttribute("data-caption") || "";
+            stage.classList.remove("is-changing");
+          }, reduceMotion ? 0 : 120);
+        };
+        next.src = thumb.getAttribute("data-image");
+      }
+
+      thumbs.forEach(function (thumb) {
+        thumb.addEventListener("click", function () { select(thumb); });
+      });
+    });
+  })();
+
   /* --- Apparition au scroll ------------------------------------------------ */
   var revealables = document.querySelectorAll("[data-reveal]");
   if ("IntersectionObserver" in window && revealables.length && !reduceMotion) {
@@ -145,7 +228,7 @@
      images ajoutées dynamiquement (boutique) grâce à la délégation d'événements. */
   (function initLightbox() {
     // Conteneurs "galerie" : les photos y sont navigables ensemble.
-    var GROUPS = ".article, .gallery, .mosaic, .locaux-grid, .cases, .pgrid, .motors, .dom-grid";
+    var GROUPS = ".article, .gallery, .mosaic, .locaux-grid, .cases, .pgrid, .motors, .dom-grid, .service-visuals";
 
     function zoomable(img) {
       if (!img || img.tagName !== "IMG") return false;
@@ -227,6 +310,16 @@
 
     document.addEventListener("click", function (e) {
       var img = e.target.closest("img");
+      if (!img) {
+        var frame = e.target.closest(".service-visuals__item");
+        img = frame && frame.querySelector("img");
+      }
+      if (img && zoomable(img)) { e.preventDefault(); open(img); }
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key !== "Enter" && e.key !== " ") return;
+      var frame = e.target.closest(".service-visuals__item");
+      var img = frame && frame.querySelector("img");
       if (img && zoomable(img)) { e.preventDefault(); open(img); }
     });
   })();
