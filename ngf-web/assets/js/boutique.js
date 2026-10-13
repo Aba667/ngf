@@ -484,14 +484,25 @@ function renderCart() {
     )
     .join("");
 
-  if (devisField) devisField.value = cartText();
+  if (devisField) devisField.value = cartPayload();
 }
 
 /* Liste lisible des articles, pour l'e-mail et WhatsApp */
-function cartText() {
-  return cartEntries()
-    .map(({ p, qty }) => `${qty} × ${p.name} (réf. ${p.ref})`)
-    .join("\n");
+function productImageURL(p) {
+  if (!p.img) return "";
+  const filename = String(p.img).split("\\").pop().split("/").pop();
+  return `https://shop.ngf-groupe.com/assets/img/products/${encodeURIComponent(filename)}`;
+}
+
+/* Données produits transmises au formulaire : la photo accompagne chaque fiche. */
+function cartPayload() {
+  return JSON.stringify(cartEntries().map(({ p, qty }) => ({
+    ref: p.ref,
+    name: p.name,
+    desc: p.desc || "",
+    qty,
+    img: p.img || "",
+  })));
 }
 
 /* Le bouton peut être dans la grille ou dans la modale famille : on cherche
@@ -512,7 +523,13 @@ function whatsappHref() {
     "Bonjour Groupe NGF,",
     "",
     "DEMANDE DE DEVIS. J'aimerais recevoir vos prix pour :",
-    ...entries.map(({ p, qty }) => `• ${qty} × ${p.name} (réf. ${p.ref})`),
+    ...entries.map(({ p, qty }) => {
+      const lignes = [`• ${qty} × ${p.name} (réf. ${p.ref})`];
+      if (p.desc) lignes.push(`  ${p.desc}`);
+      const photo = productImageURL(p);
+      if (photo) lignes.push(`  Photo : ${photo}`);
+      return lignes.join("\n");
+    }),
     "",
     "Merci de me confirmer prix et disponibilités.",
   ].join("\n");
