@@ -490,21 +490,62 @@ const catalogueProduits = {
             ]
         },
         {
-            nom: "Ciseaux de Cuisine Victorinox",
-            reference: "7.6363",
+            nom: "Ciseaux multi-usages équipés de branches ergonomiques et de lames très aiguisées en acier inoxydable",
+            reference: "7.6376",
             prix: "7 000 FCFA",
             images: [
-                "photos/ciseaux-cuisine.jpg",
-                "photos/ciseaux-cuisine-noir.jpg"
+                "photos/7.6376-multi-usages-1.jpg",
+                "photos/7.6376-multi-usages-2.jpg"
             ],
-            description: "L'allié indispensable de votre cuisine. Robustes, précis et confortables, les ciseaux de cuisine Victorinox facilitent toutes vos découpes au quotidien grâce à leur qualité suisse reconnue dans le monde entier.",
-            caracteristiques: [
-                "Acier inoxydable de haute qualité",
-                "Coupe nette et précise",
-                "Prise en main confortable",
-                "Robustes et durables",
-                "Swiss Made 🇨🇭"
-            ]
+            description: "Surpassez-vous en cuisine grâce à nos ciseaux multi-usages avec lesquels vous pourrez accomplir de nombreuses tâches, telles que hacher des fines herbes et des épices, couper de la pâte, retirer des racines et bien plus encore. Pourvus de branches ergonomiques et de lames ajustables très aiguisées en acier inoxydable, ces ciseaux se désassemblent en un clin d’œil et se nettoient avec la plus grande facilité. Un outil intégré permet d’ouvrir les bouteilles à bouchon à vis et de casser les noix proprement. Chaque article est assorti d’une garantie à vie."
+        },
+        {
+            nom: "Ciseaux à lames en acier inoxydable et poignées synthétiques",
+            reference: "8.0908.21",
+            prix: "Prix sur demande",
+            images: [
+                "photos/8.0908.21-ciseaux-maison-1.jpg",
+                "photos/8.0908.21-ciseaux-maison-2.jpg"
+            ],
+            description: "Outil indispensable dans toute maison, une paire de ciseaux se doit d'être fiable, précise, pratique et durable. C'est pourquoi nous avons intégré toutes ces qualités à nos ciseaux pour la maison et les professionnels, les rendant aussi performants au travail qu'à la maison. Dotés de lames en acier inoxydable d'une dureté exceptionnelle et de poignées en matière synthétique, ces ciseaux simples, pratiques et ergonomiques sont de véritables outils polyvalents."
+        },
+        {
+            nom: "Ciseaux de tailleur, 12 cm",
+            reference: "8.1119.26",
+            prix: "Prix sur demande",
+            images: [
+                "photos/8.1119.26-ciseaux-tailleur-lifestyle.jpg",
+                "photos/8.1119.26-ciseaux-tailleur.jpg"
+            ],
+            description: "Ciseaux de tailleur à poignée noire polie. Affirmez votre style avec nos ciseaux de tailleur professionnels. Leur manche laqué noir poli est doté d'un long chas. Les lames en acier au carbone, soigneusement fabriquées, sont idéales pour couper même les tissus épais, et leur tension est facilement réglable grâce à une vis. L'outil parfait pour tout artisan. Garantie à vie."
+        },
+        {
+            nom: "Ciseaux Victorinox bout pointu, 13 cm",
+            reference: "0.0903.13",
+            prix: "Prix sur demande",
+            image: "photos/0.0903.13-ciseaux-bout-pointu.jpg",
+            description: "Ciseaux Victorinox d'une fonctionnalité exceptionnelle. Lames tranchantes en acier inoxydable et poignées ergonomiques en plastique noir. Pour droitiers.",
+            dimensions: "Longueur totale : 13 cm"
+        },
+        {
+            nom: "Ciseaux Victorinox, 13 cm",
+            reference: "8.0962.13",
+            prix: "Prix sur demande",
+            images: [
+                "photos/8.0962.13-ciseaux-victorinox-1.jpg",
+                "photos/8.0962.13-ciseaux-victorinox-2.jpg"
+            ],
+            description: "Ciseaux Victorinox de 13 cm."
+        },
+        {
+            nom: "Petits ciseaux pour la maison « Italy », 4 cm",
+            reference: "8.1017.10",
+            prix: "Prix sur demande",
+            images: [
+                "photos/8.1017.10-ciseaux-italy-1.jpg",
+                "photos/8.1017.10-ciseaux-italy-2.jpg"
+            ],
+            description: "Petits ciseaux pour la maison avec des branches synthétiques confortables. Découvrez le plus petit modèle de notre collection « Italy ». Confortables, grâce à leurs branches synthétiques ergonomiques, les ciseaux pour la maison « Italy » sont également équipés de lames très aiguisées en acier inoxydable, l’alliance parfaite pour accomplir une multitude de travaux généraux de découpe. Leurs lames s’ajustent et se désassemblent facilement, et leur design tout en légèreté garantit une manipulation sans effort. Investissez dans un outil conçu pour durer. Chaque article est assorti d’une garantie à vie."
         },
         {
             nom: "Tire-Bouchon avec Coupe-Capsule Intégré",
@@ -527,7 +568,6 @@ const catalogueProduits = {
             ],
             dimensions: "Spirale sans fin · Coupe-capsule intégré · Ouverture sans effort"
         },
-        { nom: "Ciseaux de Cuisine «Professional» Forgés", reference: "7.6376", prix: "Prix sur demande", image: "photos/7.6376.jpg", description: "Ciseaux de cuisine multi-usages forgés à chaud, entièrement en inox. Longueur totale 19,5 cm." },
         { nom: "Cisaille à Volaille «Victorinox»", reference: "7.6343", prix: "Prix sur demande", image: "photos/7.6343.jpg", description: "Cisaille à volaille en inox, longueur totale 25 cm. Ressort spiralé remplaçable (7.6343.11)." },
         { nom: "Cisaille à Volaille «Professional»", reference: "7.6344", prix: "Prix sur demande", image: "photos/7.6344.jpg", description: "Cisaille à volaille professionnelle en inox, longueur totale 25 cm." },
         { nom: "Cisaille à Volaille à Ressort Tampon", reference: "7.6345", prix: "Prix sur demande", image: "photos/7.6345.jpg", description: "Cisaille à volaille tout inox avec ressort tampon, longueur totale 25 cm." },
@@ -906,12 +946,35 @@ function prixSurDemande(prod) {
     return !prod.prix || /sur demande/i.test(prod.prix);
 }
 
-// Lien d'achat WhatsApp avec message pré-rempli
+// Les coordonnées des photos accompagnent chaque demande produit.
+function photosProduit(prod) {
+    return getProductMedias(prod)
+        .filter(media => media.type === 'image' && media.src)
+        .map(media => new URL(media.src, window.location.href).href);
+}
+
+function messageProduit(prod) {
+    const lignes = [
+        `Bonjour, je suis intéressé(e) par : ${prod.nom}`,
+        `Référence : ${prod.reference}`
+    ];
+    if (prod.prix) lignes.push(`Prix : ${prod.prix}`);
+    if (prod.description) lignes.push(`Description : ${prod.description}`);
+    const photos = photosProduit(prod);
+    if (photos.length) lignes.push('Photos du produit :', ...photos);
+    lignes.push('Pouvez-vous me confirmer son prix et sa disponibilité ?');
+    return lignes.join('\n');
+}
+
+// Lien WhatsApp avec la fiche et les liens directs vers les photos.
 function lienWhatsApp(prod) {
-    const msg = prixSurDemande(prod)
-        ? `Bonjour, je suis intéressé(e) par : ${prod.nom} (Réf. ${prod.reference}). Pouvez-vous m'indiquer son prix et sa disponibilité ?`
-        : `Bonjour, je suis intéressé(e) par : ${prod.nom} (Réf. ${prod.reference}), ${prod.prix}. Est-il disponible ?`;
-    return `https://wa.me/${WHATSAPP_ACHAT}?text=${encodeURIComponent(msg)}`;
+    return `https://wa.me/${WHATSAPP_ACHAT}?text=${encodeURIComponent(messageProduit(prod))}`;
+}
+
+// Demande e-mail préremplie avec la même fiche et les mêmes liens photo.
+function lienEmail(prod) {
+    const sujet = `Demande d'information - ${prod.nom} (${prod.reference})`;
+    return `mailto:Victorinoxsenegal.nfg@gmail.com?subject=${encodeURIComponent(sujet)}&body=${encodeURIComponent(messageProduit(prod))}`;
 }
 
 // =========================================
@@ -1051,6 +1114,9 @@ function createProductModal() {
                     </div>
                     <a class="btn-whatsapp pm-buy" href="#" target="_blank" rel="noopener">
                         <i class="fa-brands fa-whatsapp"></i> Commander sur WhatsApp
+                    </a>
+                    <a class="btn btn-primary pm-email" href="#">
+                        <i class="fa-solid fa-envelope"></i> Demander par e-mail
                     </a>
                 </div>
             </div>
@@ -1246,6 +1312,7 @@ function openProductModal(prod) {
     }
 
     modal.querySelector('.pm-buy').href = lienWhatsApp(prod);
+    modal.querySelector('.pm-email').href = lienEmail(prod);
 
     modal.querySelector('.product-modal-box').scrollTop = 0;
     modal.classList.add('open');

@@ -637,7 +637,7 @@ $("#cart-devis-form")?.addEventListener("submit", (e) => {
     e.preventDefault();
     return;
   }
-  devisField.value = cartText();
+  devisField.value = cartPayload();
 });
 
 /* Retour de devis-produits.php (?devis=ok|err) */

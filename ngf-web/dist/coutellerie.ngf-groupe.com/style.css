@@ -1973,6 +1973,10 @@ footer {
     .btn-whatsapp {
         width: 100%;
     }
+    .pm-email {
+        width: 100%;
+        text-decoration: none;
+    }
 }
 
 /* =========================================
