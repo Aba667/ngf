@@ -520,22 +520,19 @@ const catalogueProduits = {
             description: "Ciseaux de tailleur à poignée noire polie. Affirmez votre style avec nos ciseaux de tailleur professionnels. Leur manche laqué noir poli est doté d'un long chas. Les lames en acier au carbone, soigneusement fabriquées, sont idéales pour couper même les tissus épais, et leur tension est facilement réglable grâce à une vis. L'outil parfait pour tout artisan. Garantie à vie."
         },
         {
-            nom: "Ciseaux Victorinox bout pointu, 13 cm",
+            nom: "Ciseaux Victorinox à bout pointu, 13 cm",
             reference: "0.0903.13",
-            prix: "Prix sur demande",
+            prix: "7 000 FCFA",
             image: "photos/0.0903.13-ciseaux-bout-pointu.jpg",
             description: "Ciseaux Victorinox d'une fonctionnalité exceptionnelle. Lames tranchantes en acier inoxydable et poignées ergonomiques en plastique noir. Pour droitiers.",
             dimensions: "Longueur totale : 13 cm"
         },
         {
-            nom: "Ciseaux Victorinox, 13 cm",
+            nom: "Ciseaux Victorinox à bout rond, 13 cm",
             reference: "8.0962.13",
-            prix: "Prix sur demande",
-            images: [
-                "photos/8.0962.13-ciseaux-victorinox-1.jpg",
-                "photos/8.0962.13-ciseaux-victorinox-2.jpg"
-            ],
-            description: "Ciseaux Victorinox de 13 cm."
+            prix: "7 000 FCFA",
+            image: "photos/8.0962.13-ciseaux-bout-rond.jpg",
+            description: "Ciseaux Victorinox de 13 cm à bout rond."
         },
         {
             nom: "Petits ciseaux pour la maison « Italy », 4 cm",
