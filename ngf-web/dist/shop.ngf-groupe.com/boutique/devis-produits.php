@@ -2,7 +2,7 @@
 /**
  * GROUPE NGF, Demande de devis depuis la boutique.
  * Les articles sélectionnés sont transmis avec leur description et le nom du
- * fichier photo. Les visuels existants sont affichés dans le mail HTML.
+ * fichier photo. Les visuels disponibles sont intégrés au mail en images inline.
  */
 
 declare(strict_types=1);
@@ -79,6 +79,9 @@ $paires = ['Nom' => $nom, 'E-mail' => $email]
 $precisions = champ('precisions', 2000);
 
 $articles = [];
+$emailImages = [];
+$emailImageIds = [];
+$tailleTotaleImages = 0;
 $articlesJson = json_decode($produitsBrut, true);
 $formatCatalogue = is_array($articlesJson) && json_last_error() === JSON_ERROR_NONE;
 if ($formatCatalogue) {
@@ -97,11 +100,42 @@ if ($formatCatalogue) {
         $imageBrute = valeurProduit($entree['img'] ?? '', 180);
         $imageNom = basename(str_replace('\\', '/', $imageBrute));
         $imageUrl = '';
+        $imageCid = '';
+        $cheminPhotoReel = realpath(__DIR__ . '/../assets/img/products/' . $imageNom);
+        $dossierPhotosReel = realpath(__DIR__ . '/../assets/img/products');
+        $nomPhotoAutorise = $imageBrute === $imageNom
+            || $imageBrute === 'assets/img/products/' . $imageNom;
         if ($imageBrute !== ''
-            && $imageNom === $imageBrute
+            && $nomPhotoAutorise
             && preg_match('/\\A[a-zA-Z0-9._-]+\\.(?:jpe?g|png|webp|gif)\\z/i', $imageNom)
-            && is_file(__DIR__ . '/../assets/img/products/' . $imageNom)) {
+            && $cheminPhotoReel !== false
+            && $dossierPhotosReel !== false
+            && strpos($cheminPhotoReel, $dossierPhotosReel . DIRECTORY_SEPARATOR) === 0
+            && is_file($cheminPhotoReel)) {
             $imageUrl = 'https://shop.ngf-groupe.com/assets/img/products/' . rawurlencode($imageNom);
+
+            if (isset($emailImageIds[$imageNom])) {
+                $imageCid = $emailImageIds[$imageNom];
+            } else {
+                $mime = function_exists('mime_content_type') ? mime_content_type($cheminPhotoReel) : '';
+                $taille = filesize($cheminPhotoReel);
+                $mimesAutorises = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+                if (is_string($mime)
+                    && in_array($mime, $mimesAutorises, true)
+                    && $taille !== false
+                    && $taille <= 5 * 1024 * 1024
+                    && $tailleTotaleImages + $taille <= 8 * 1024 * 1024) {
+                    $imageCid = 'ngf-photo-' . count($emailImages) . '@ngf-groupe.com';
+                    $emailImageIds[$imageNom] = $imageCid;
+                    $emailImages[] = [
+                        'path' => $cheminPhotoReel,
+                        'name' => $imageNom,
+                        'mime' => $mime,
+                        'cid' => $imageCid,
+                    ];
+                    $tailleTotaleImages += $taille;
+                }
+            }
         }
 
         $articles[] = [
@@ -110,6 +144,7 @@ if ($formatCatalogue) {
             'desc' => $description,
             'qty' => $quantite,
             'image' => $imageUrl,
+            'imageCid' => $imageCid,
         ];
     }
 }
@@ -134,7 +169,12 @@ if ($articles) {
         $nomHtml = echapperHtml($article['name']);
         $refHtml = echapperHtml($article['ref']);
         $descHtml = echapperHtml($article['desc']);
-        if ($article['image'] !== '') {
+        if ($article['imageCid'] !== '') {
+            $urlHtml = echapperHtml($article['image']);
+            $cidHtml = echapperHtml($article['imageCid']);
+            $photoHtml = '<a href="' . $urlHtml . '"><img src="cid:' . $cidHtml
+                . '" alt="' . $nomHtml . '" width="150" style="display:block;width:150px;max-width:100%;height:auto;border:0"></a>';
+        } elseif ($article['image'] !== '') {
             $urlHtml = echapperHtml($article['image']);
             $photoHtml = '<a href="' . $urlHtml . '"><img src="' . $urlHtml
                 . '" alt="' . $nomHtml . '" width="150" style="display:block;width:150px;max-width:100%;height:auto;border:0"></a>';
@@ -156,15 +196,16 @@ if ($articles) {
     $articlesHtml = '<pre style="white-space:pre-wrap">' . echapperHtml($produitsBrut) . '</pre>';
 }
 
-$corpsTexte = "DEMANDE DE DEVIS, Boutique en ligne ngf-groupe.com\n"
-       . str_repeat('-', 50) . "\n\n"
+$corpsTexte = "Bonjour l’équipe commerciale du Groupe NGF,\n\n"
+       . "Vous avez reçu une nouvelle demande de devis depuis la boutique en ligne.\n\n"
        . bloc($paires) . "\n\n"
        . "Produits demandés :\n"
        . $produitsTexte . "\n";
 if ($precisions !== '') {
     $corpsTexte .= "\nPrécisions du client :\n{$precisions}\n";
 }
-$corpsTexte .= "\n→ Merci de répondre au client avec prix et disponibilités.\n";
+$corpsTexte .= "\nJe vous remercie par avance de bien vouloir confirmer au client les prix, les disponibilités et les délais de livraison.\n\n"
+       . "Bien cordialement,\nL’équipe de la boutique NGF\n";
 
 $pairesHtml = '';
 foreach ($paires as $etiquette => $valeur) {
@@ -173,27 +214,47 @@ foreach ($paires as $etiquette => $valeur) {
         . echapperHtml((string) $valeur) . '</td></tr>';
 }
 $html = '<!doctype html><html lang="fr"><meta charset="utf-8"><body style="font:14px/1.5 Arial,sans-serif;color:#10233e">'
-      . '<h2>Demande de devis, boutique NGF</h2><table>' . $pairesHtml . '</table>'
+      . '<p>Bonjour l’équipe commerciale du Groupe NGF,</p>'
+      . '<p>Vous avez reçu une nouvelle demande de devis depuis la boutique en ligne.</p>'
+      . '<table>' . $pairesHtml . '</table>'
       . '<h3>Produits demandés</h3>' . $articlesHtml
       . ($precisions !== '' ? '<h3>Précisions du client</h3><p>' . echapperHtml($precisions) . '</p>' : '')
-      . '<p>Merci de répondre au client avec prix et disponibilités.</p></body></html>';
+      . '<p>Merci de confirmer au client les prix, les disponibilités et les délais de livraison.</p>'
+      . '<p>Bien cordialement,<br>L’équipe de la boutique NGF</p></body></html>';
 
-$boundary = '=_NGF_' . bin2hex(random_bytes(16));
-$corps = '--' . $boundary . "\r\n"
+$boundaryAlternatif = '=_NGF_ALT_' . bin2hex(random_bytes(12));
+$boundaryLie = '=_NGF_REL_' . bin2hex(random_bytes(12));
+$corps = '--' . $boundaryLie . "\r\n"
+       . 'Content-Type: multipart/alternative; boundary="' . $boundaryAlternatif . '"' . "\r\n\r\n"
+       . '--' . $boundaryAlternatif . "\r\n"
        . "Content-Type: text/plain; charset=UTF-8\r\n"
        . "Content-Transfer-Encoding: base64\r\n\r\n"
        . chunk_split(base64_encode($corpsTexte), 76, "\r\n")
-       . '--' . $boundary . "\r\n"
+       . '--' . $boundaryAlternatif . "\r\n"
        . "Content-Type: text/html; charset=UTF-8\r\n"
        . "Content-Transfer-Encoding: base64\r\n\r\n"
        . chunk_split(base64_encode($html), 76, "\r\n")
-       . '--' . $boundary . "--\r\n";
+       . '--' . $boundaryAlternatif . "--\r\n";
+
+foreach ($emailImages as $image) {
+    $contenuImage = file_get_contents($image['path']);
+    if ($contenuImage === false) {
+        continue;
+    }
+    $corps .= '--' . $boundaryLie . "\r\n"
+           . 'Content-Type: ' . $image['mime'] . '; name="' . $image['name'] . '"' . "\r\n"
+           . "Content-Transfer-Encoding: base64\r\n"
+           . 'Content-ID: <' . $image['cid'] . ">\r\n"
+           . 'Content-Disposition: inline; filename="' . $image['name'] . '"' . "\r\n\r\n"
+           . chunk_split(base64_encode($contenuImage), 76, "\r\n");
+}
+$corps .= '--' . $boundaryLie . "--\r\n";
 
 $entetes = [
     'From: Groupe NGF, Boutique <' . $EXPEDITEUR . '>',
     'Reply-To: ' . $nom . ' <' . $email . '>',
     'MIME-Version: 1.0',
-    'Content-Type: multipart/alternative; boundary="' . $boundary . '"',
+    'Content-Type: multipart/related; type="multipart/alternative"; boundary="' . $boundaryLie . '"',
 ];
 $objet = '=?UTF-8?B?' . base64_encode('DEMANDE DE DEVIS, Boutique, ' . $nom) . '?=';
 $ok = mail($DESTINATAIRE, $objet, $corps, implode("\r\n", $entetes));

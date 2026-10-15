@@ -1907,6 +1907,64 @@ footer {
     flex-wrap: wrap;
 }
 
+.pm-email { cursor: pointer; }
+.pm-email-form {
+    display: grid;
+    gap: 13px;
+    margin-top: 18px;
+    padding: 20px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: #fafafa;
+}
+.pm-email-form[hidden] { display: none; }
+.pm-email-form__intro {
+    color: var(--text-light);
+    font-size: .9rem;
+}
+.pm-email-form label {
+    display: grid;
+    gap: 6px;
+    color: var(--text);
+    font-size: .88rem;
+    font-weight: 650;
+}
+.pm-email-form label span {
+    display: inline;
+    color: var(--text-light);
+    font-size: .8rem;
+    font-weight: 400;
+}
+.pm-email-form input,
+.pm-email-form textarea {
+    width: 100%;
+    padding: 11px 12px;
+    border: 1px solid rgba(0, 0, 0, .16);
+    border-radius: 9px;
+    background: #fff;
+    color: var(--text);
+    font: inherit;
+}
+.pm-email-form textarea { resize: vertical; }
+.pm-email-form input:focus,
+.pm-email-form textarea:focus {
+    outline: 2px solid rgba(225, 6, 0, .2);
+    border-color: var(--brand-red);
+}
+.pm-email-form__trap {
+    position: absolute !important;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+}
+.pm-email-form__submit { justify-self: start; }
+.pm-email-form__submit:disabled { cursor: wait; opacity: .7; }
+.pm-email-form__status { color: #176b3a; font-size: .9rem; }
+.pm-email-form__status.is-error { color: #b42318; }
+.pm-email-fallback { color: var(--brand-red-dark); font-size: .86rem; text-decoration: underline; }
+
 .pm-price {
     font-size: 1.7rem;
     font-weight: 800;
@@ -1977,6 +2035,8 @@ footer {
         width: 100%;
         text-decoration: none;
     }
+    .pm-email-form { padding: 16px; }
+    .pm-email-form__submit { width: 100%; }
 }
 
 /* =========================================

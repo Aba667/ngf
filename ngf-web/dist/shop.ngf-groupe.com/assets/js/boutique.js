@@ -520,18 +520,21 @@ function whatsappHref() {
   if (!entries.length) return "#";
 
   const message = [
-    "Bonjour Groupe NGF,",
+    "Bonjour l’équipe commerciale du Groupe NGF,",
     "",
-    "DEMANDE DE DEVIS. J'aimerais recevoir vos prix pour :",
+    "Je souhaite recevoir un devis pour les produits suivants :",
     ...entries.map(({ p, qty }) => {
       const lignes = [`• ${qty} × ${p.name} (réf. ${p.ref})`];
       if (p.desc) lignes.push(`  ${p.desc}`);
       const photo = productImageURL(p);
-      if (photo) lignes.push(`  Photo : ${photo}`);
+      if (photo) lignes.push(`  Photo du produit : ${photo}`);
       return lignes.join("\n");
     }),
     "",
-    "Merci de me confirmer prix et disponibilités.",
+    "Pourriez-vous me confirmer les prix, les disponibilités et les délais de livraison ?",
+    "",
+    "Je vous remercie par avance pour votre retour.",
+    "Bien cordialement,",
   ].join("\n");
 
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;

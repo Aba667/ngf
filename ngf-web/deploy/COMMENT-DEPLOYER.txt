@@ -7,27 +7,106 @@ domaine ou sous-domaine. Deux sortes de ZIP, à ne pas confondre.
 
 MISE À JOUR (on extrait PAR-DESSUS, sans rien vider) :
 
-  DERNIÈRE MISE À JOUR — 07/08/2026 :
+  DERNIÈRE MISE À JOUR — 15/10/2026 :
 
-  maj-2026-08-07-ngf-groupe.zip  -> domaine principal ngf-groupe.com
-  maj-2026-08-07-dees.zip        -> sous-domaine  dees.ngf-groupe.com
-  maj-2026-08-07-piriou.zip      -> sous-domaine  piriou.ngf-groupe.com
+  maj-2026-10-15-ngf-accueil.zip       -> domaine principal ngf-groupe.com
+  maj-2026-10-15-ngf-shop.zip          -> sous-domaine  shop.ngf-groupe.com
+  maj-2026-10-15-ngf-coutellerie.zip   -> sous-domaine  coutellerie.ngf-groupe.com
 
-  Cette mise à jour ajoute trois actualités et la galerie « avant / après »
-  (deux photothèques switchables reliées par une flèche, sur le modèle de
-  la visionneuse plein écran déjà en place) : la rénovation de la Résidence
-  de Serigne Bassirou Mbacké à Touba Darou Miname (DEES), une nouvelle photo
-  aérienne sur l'article de la Grande Mosquée de Touba (DEES), et le PASSEX
-  entre le Walo et l'USS Truxtun avec sa vidéo (Piriou Ngom). Seuls ces trois
-  domaines sont concernés : transit et shop n'ont pas changé, leurs derniers
-  ZIP (31/07/2026, ci-dessous) restent valables tels quels.
+  Accueil : mise à jour de la présentation « Plus de 2 500 articles
+  disponibles » et des informations sur les fiches techniques et certifications.
+  Shop et coutellerie : les demandes par e-mail intègrent les photos disponibles
+  des produits ; les messages WhatsApp fournissent leurs liens directs.
+  Le ZIP coutellerie sépare les modèles de ciseaux à bout pointu et à bout rond.
+  Seuls ces trois domaines sont concernés.
 
+  MISE À JOUR PRÉCÉDENTE — 23/09/2026 :
+
+  MISE À JOUR — 28/09/2026 :
+
+  maj-2026-09-28-dees-references-clients.zip
+      -> sous-domaine dees.ngf-groupe.com
+
+  DEES : la section « Ils nous ont fait confiance » affiche les logos de
+  Barrick/Loulo, Vivo Energy, SAR, DP World et la Marine nationale sénégalaise.
+  SOMILO est affiché avec un lettrage typographique, aucun logo officiel
+  distinct n'ayant été trouvé. Le ZIP contient la page Réalisations et les
+  fichiers graphiques ; l'extraire par-dessus le site existant.
+  Si la page affiche « 403 Forbidden », vérifier dans cPanel que le fichier
+  realisations.html est en permissions 644. Le ZIP corrigé contient déjà ce
+  réglage ; les dossiers du site doivent être en 755.
+
+  CORRECTION D'ADRESSE E-MAIL — à extraire par-dessus le site existant :
+
+  maj-2026-09-23-ngf-email-correction.zip
+      -> domaine principal ngf-groupe.com
+
+  maj-2026-09-23-dees-email-correction.zip
+      -> sous-domaine dees.ngf-groupe.com
+
+  maj-2026-09-23-shop-email-correction.zip
+      -> sous-domaine shop.ngf-groupe.com
+
+  Remplacement de depcom@ngomfreres.com par ngfdepcom@ngomfreres.com dans
+  les pages, formulaires et scripts de contact concernés. Ces ZIP ne contiennent
+  que les fichiers de ces trois sites où l'adresse apparaît.
+
+  maj-2026-09-23-coutellerie-offre-camouflage.zip
+      -> sous-domaine coutellerie.ngf-groupe.com
+
+  Victorinox : ajout de l'affiche de la collection Camouflage dans la
+  galerie des offres, avec les tarifs des trois formats (15 000, 20 000
+  et 25 000 FCFA).
+
+  maj-2026-09-23-shop-retrait-siroil-stock-hafa.zip
+      -> sous-domaine shop.ngf-groupe.com
+
+  Boutique : retrait du produit Siroil du catalogue et remplacement de la
+  photo des fûts HAFA par la photo réelle de l'entrepôt. Le chargement du
+  catalogue est versionné pour éviter qu'une ancienne copie reste en cache.
+
+  ../output/piriou-ngf-reportage-2026-09-23.zip
+      -> sous-domaine piriou.ngf-groupe.com
+
+  Piriou : nouveau reportage illustré sur les interventions techniques à
+  bord, ajout de photos aux actualités et aux réalisations, et mise en avant
+  du reportage sur la page d'accueil. Les textes s'appuient sur le reportage
+  photographique du 15 septembre 2026. Les liens et le formulaire de contact
+  utilisent l'adresse ngfdepcom@ngomfreres.com.
+
+  MISE À JOUR PRÉCÉDENTE — 21/08/2026 :
+
+  maj-2026-08-21-coutellerie.zip  -> sous-domaine  coutellerie.ngf-groupe.com
+
+  Catalogue Victorinox : ajout de quatre couteaux suisses (Waiter Red
+  12 000 F, Spartan Ecoline Red 14 000 F, Picknicker Red 15 000 F, Nail
+  Clip 580 Red 18 000 F) et des prix qui manquaient encore (SwissChamp
+  55 000 F, Rescue Tool LUM Yellow 65 000 F, Ranger Boatsman MW Grip
+  65 000 F, les trois étuis-ceinture 15 000 F).
+
+  Reprend aussi les mises à jour précédentes : offres SwissTool Spirit
+  XC Plus et « Prêt pour Toutes les Missions » en tête du carrousel,
+  catalogue trié du prix le moins cher au plus cher, Ranger Wood 55,
+  Nomad Black, Trailmaster Black, Classic SD Camouflage, Ranger Boatsman
+  MW Grip, retrait des quatre produits qui ne sont plus en stock,
+  référence corrigée du Rescue Tool LUM Yellow (0.8623.MWN), et plus
+  de mention « Réf : À confirmer » pour les produits sans référence.
+  La page produits reste en affichage global : les puces de catégorie,
+  puis tous les articles de la catégorie d'un bloc.
+
+  Seul coutellerie est concerné : les autres domaines n'ont pas changé.
+  Leurs ZIP ne sont plus dans ce dossier (déjà déployés) ; au besoin on
+  les refabrique depuis dist/ avec « python3 build.py ».
+
+  maj-2026-08-10-ngf-groupe.zip  -> domaine principal ngf-groupe.com
+  maj-2026-08-10-dees.zip        -> sous-domaine  dees.ngf-groupe.com
+  maj-2026-08-10-piriou.zip      -> sous-domaine  piriou.ngf-groupe.com
   maj-2026-07-31-transit.zip     -> sous-domaine  transit.ngf-groupe.com
   maj-2026-07-31-shop.zip        -> sous-domaine  shop.ngf-groupe.com
 
-  Les archives remplacées par la mise à jour du 07/08 ont été supprimées
-  pour éviter toute confusion (ne pas réappliquer d'anciens ZIP après des
-  plus récents pour le même domaine).
+  Ne pas réappliquer d'anciens ZIP après un ZIP plus récent pour le même
+  domaine : le fichier daté du 19/08 remplace la mise à jour coutellerie
+  du 10/08, qui a été supprimée pour éviter toute confusion.
 
 
 ÉTAPES DANS cPanel (les mêmes pour chaque ZIP)
@@ -63,7 +142,7 @@ WhatsApp garde en mémoire l'aperçu d'un lien pendant plusieurs jours. Pour
 le forcer à relire la page, partager une fois l'adresse avec un paramètre
 en plus, par exemple :
 
-  https://piriou.ngf-groupe.com/?v=2
+  https://piriou.ngf-groupe.com/?v=3
 
 L'aperçu doit alors montrer la carte au logo PIRIOU NGOM-SENEGAL.
 
@@ -72,7 +151,7 @@ IMPORTANT : les formulaires de contact et de devis (.php)
 ------------------------------------------------------------------------
 Ils fonctionnent avec la fonction mail() de o2switch, rien à configurer.
 Les demandes arrivent sur :
-  - Devis (site principal) et DEES / Piriou : depcom@ngomfreres.com
+  - Devis (site principal) et DEES / Piriou : ngfdepcom@ngomfreres.com
   - NGF Transit                             : ngftransit@orange.sn
 
 Seule réserve : comme l'e-mail part depuis le serveur ngf-groupe.com mais

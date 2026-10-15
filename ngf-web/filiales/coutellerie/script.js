@@ -950,16 +950,26 @@ function photosProduit(prod) {
         .map(media => new URL(media.src, window.location.href).href);
 }
 
+function fichiersPhotosProduit(prod) {
+    return getProductMedias(prod)
+        .filter(media => media.type === 'image' && media.src)
+        .map(media => decodeURIComponent(new URL(media.src, window.location.href).pathname.split('/').pop() || ''))
+        .filter(nom => /^[a-zA-Z0-9._-]+\.(?:jpe?g|png|webp|gif)$/i.test(nom));
+}
+
 function messageProduit(prod) {
     const lignes = [
-        `Bonjour, je suis intéressé(e) par : ${prod.nom}`,
+        'Bonjour l’équipe commerciale de Coutellerie Victorinox Sénégal,',
+        '',
+        'Je souhaite obtenir des informations sur le produit suivant :',
+        `Produit : ${prod.nom}`,
         `Référence : ${prod.reference}`
     ];
-    if (prod.prix) lignes.push(`Prix : ${prod.prix}`);
+    if (prod.prix) lignes.push(`Prix indiqué sur le site : ${prod.prix}`);
     if (prod.description) lignes.push(`Description : ${prod.description}`);
     const photos = photosProduit(prod);
-    if (photos.length) lignes.push('Photos du produit :', ...photos);
-    lignes.push('Pouvez-vous me confirmer son prix et sa disponibilité ?');
+    if (photos.length) lignes.push('', 'Photos du produit :', ...photos);
+    lignes.push('', 'Pourriez-vous me confirmer son prix, sa disponibilité et le délai de livraison ?', '', 'Je vous remercie par avance pour votre retour.', 'Bien cordialement,');
     return lignes.join('\n');
 }
 
@@ -1112,10 +1122,21 @@ function createProductModal() {
                     <a class="btn-whatsapp pm-buy" href="#" target="_blank" rel="noopener">
                         <i class="fa-brands fa-whatsapp"></i> Commander sur WhatsApp
                     </a>
-                    <a class="btn btn-primary pm-email" href="#">
+                    <button class="btn btn-primary pm-email" type="button" aria-expanded="false" aria-controls="pm-email-form">
                         <i class="fa-solid fa-envelope"></i> Demander par e-mail
-                    </a>
+                    </button>
                 </div>
+                <form class="pm-email-form" id="pm-email-form" hidden>
+                    <p class="pm-email-form__intro">Votre demande sera envoyée avec les photos du produit directement intégrées à l’e-mail.</p>
+                    <label>Votre nom<input name="name" type="text" maxlength="120" autocomplete="name" required></label>
+                    <label>Votre adresse e-mail<input name="email" type="email" maxlength="160" autocomplete="email" required></label>
+                    <label>Votre téléphone <span>(facultatif)</span><input name="phone" type="tel" maxlength="40" autocomplete="tel"></label>
+                    <label>Message complémentaire <span>(facultatif)</span><textarea name="message" rows="3" maxlength="1200"></textarea></label>
+                    <label class="pm-email-form__trap" aria-hidden="true">Ne pas remplir<input name="website" type="text" tabindex="-1" autocomplete="off"></label>
+                    <button class="btn btn-primary pm-email-form__submit" type="submit">Envoyer ma demande</button>
+                    <p class="pm-email-form__status" role="status" aria-live="polite"></p>
+                    <a class="pm-email-fallback" href="#">Ouvrir votre application e-mail à la place</a>
+                </form>
             </div>
         </div>
     `;
@@ -1127,6 +1148,56 @@ function createProductModal() {
     modal.querySelector('.product-modal-close').addEventListener('click', close);
     modal.addEventListener('click', (e) => {
         if (e.target === modal) close();
+    });
+
+    const emailButton = modal.querySelector('.pm-email');
+    const emailForm = modal.querySelector('.pm-email-form');
+    emailButton.addEventListener('click', () => {
+        emailForm.hidden = !emailForm.hidden;
+        emailButton.setAttribute('aria-expanded', String(!emailForm.hidden));
+        if (!emailForm.hidden) emailForm.querySelector('[name="name"]').focus();
+    });
+
+    emailForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (!activeProduct) return;
+
+        const formData = new FormData(emailForm);
+        const submitButton = emailForm.querySelector('.pm-email-form__submit');
+        const status = emailForm.querySelector('.pm-email-form__status');
+        submitButton.disabled = true;
+        status.textContent = 'Envoi de votre demande…';
+        status.classList.remove('is-error');
+
+        try {
+            const response = await fetch('demande-produit.php', {
+                method: 'POST',
+                headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name: formData.get('name'),
+                    email: formData.get('email'),
+                    phone: formData.get('phone'),
+                    message: formData.get('message'),
+                    website: formData.get('website'),
+                    product: {
+                        name: activeProduct.nom,
+                        reference: activeProduct.reference,
+                        price: activeProduct.prix || '',
+                        description: activeProduct.description || '',
+                        images: fichiersPhotosProduit(activeProduct)
+                    }
+                })
+            });
+            const result = await response.json();
+            if (!response.ok || !result.success) throw new Error(result.message || 'Envoi impossible.');
+            status.textContent = 'Votre demande a bien été envoyée avec les photos du produit. Notre équipe vous répondra rapidement.';
+            emailForm.reset();
+        } catch (error) {
+            status.textContent = 'L’envoi n’a pas abouti. Vous pouvez réessayer ou ouvrir votre application e-mail avec la fiche et les liens des photos.';
+            status.classList.add('is-error');
+        } finally {
+            submitButton.disabled = false;
+        }
     });
 
     // Navigation du carrousel (flèches précédent / suivant)
@@ -1155,6 +1226,7 @@ function createProductModal() {
 
 // Contrôleur du carrousel actuellement affiché (pour clavier / flèches)
 let currentCarousel = null;
+let activeProduct = null;
 
 // Construit la liste des médias d'un produit (images + vidéo éventuelle)
 function getProductMedias(prod) {
@@ -1279,6 +1351,7 @@ function openProductModal(prod) {
     const modal = document.querySelector('.product-modal');
     if (!modal) return;
 
+    activeProduct = prod;
     currentCarousel = buildCarousel(prod);
 
     modal.querySelector('.pm-title').textContent = prod.nom;
@@ -1309,7 +1382,14 @@ function openProductModal(prod) {
     }
 
     modal.querySelector('.pm-buy').href = lienWhatsApp(prod);
-    modal.querySelector('.pm-email').href = lienEmail(prod);
+    const emailForm = modal.querySelector('.pm-email-form');
+    emailForm.reset();
+    emailForm.hidden = true;
+    const emailStatus = emailForm.querySelector('.pm-email-form__status');
+    emailStatus.textContent = '';
+    emailStatus.classList.remove('is-error');
+    modal.querySelector('.pm-email').setAttribute('aria-expanded', 'false');
+    modal.querySelector('.pm-email-fallback').href = lienEmail(prod);
 
     modal.querySelector('.product-modal-box').scrollTop = 0;
     modal.classList.add('open');
